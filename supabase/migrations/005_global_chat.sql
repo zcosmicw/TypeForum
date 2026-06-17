@@ -14,9 +14,9 @@ CREATE INDEX IF NOT EXISTS global_chat_messages_created_at_idx ON public.global_
 -- Enable Row Level Security (RLS)
 ALTER TABLE public.global_chat_messages ENABLE ROW LEVEL SECURITY;
 
--- Policy 1: Authenticated users can view chat messages
-CREATE POLICY "Signed in users can view chat messages" ON public.global_chat_messages
-  FOR SELECT USING (auth.uid() IS NOT NULL);
+-- Policy 1: Anyone can view chat messages
+CREATE POLICY "Anyone can view chat messages" ON public.global_chat_messages
+  FOR SELECT USING (true);
 
 -- Policy 2: Authenticated users can insert their own chat messages
 CREATE POLICY "Signed in users can post chat messages" ON public.global_chat_messages

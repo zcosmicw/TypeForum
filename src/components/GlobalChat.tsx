@@ -154,7 +154,9 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
           }
         }
       )
-      .subscribe();
+      .subscribe((status, err) => {
+        console.log("Realtime subscription status:", status, err);
+      });
 
     // Clean up subscription when the component is destroyed
     return () => {
