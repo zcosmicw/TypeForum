@@ -113,6 +113,7 @@ export default async function AdminDashboardPage() {
                         targetUserId={userItem.id}
                         targetUsername={userItem.username}
                         currentRole={userItem.role}
+                        currentRank={userItem.userRank}
                         isBanned={userItem.isBanned}
                         currentUserRole={currentProfile.role || "user"}
                         currentUserId={currentProfile.id}

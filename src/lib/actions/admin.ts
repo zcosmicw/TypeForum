@@ -144,3 +144,22 @@ export async function toggleBanUserAction(targetUserId: string, targetUsername: 
   revalidatePath(`/u/${targetUsername}`);
   return { success: true };
 }
+
+export async function updateUserRankAction(targetUserId: string, targetUsername: string, rank: string) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) throw new Error("Unauthorized: Only admins can manage user ranks");
+
+  const supabase = await createClient();
+  if (!supabase) throw new Error("Database not connected");
+
+  const { error } = await supabase
+    .from("profiles")
+    .update({ rank })
+    .eq("id", targetUserId);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin");
+  revalidatePath(`/u/${targetUsername}`);
+  return { success: true };
+}

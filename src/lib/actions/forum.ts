@@ -311,44 +311,7 @@ export async function followUser(formData: FormData) {
   return {};
 }
 
-export async function voteTier(formData: FormData) {
-  if (!isSupabaseConfigured()) {
-    return { error: getSupabaseEnvError() };
-  }
 
-  const profile = await getSessionProfile();
-  if (!profile) return { error: "Login required." };
-  if (profile.is_banned) return { error: "Your account is banned." };
-
-  const targetUsername = String(formData.get("username") ?? "");
-  const rank = String(formData.get("rank") ?? "");
-
-  const validTiers = ["rank1", "rank2", "rank3", "rank4", "rank5"];
-  if (!targetUsername || !validTiers.includes(rank)) {
-    return { error: "Invalid rank vote." };
-  }
-
-  const supabase = await createClient();
-  if (!supabase) return { error: getSupabaseEnvError() };
-
-  const { data: targetProfile } = await supabase
-    .from("profiles")
-    .select("id, rank_votes")
-    .eq("username", targetUsername)
-    .single();
-
-  if (!targetProfile) return { error: "User not found." };
-
-  const { error } = await supabase
-    .from("profiles")
-    .update({ rank: rank, rank_votes: targetProfile.rank_votes + 1 })
-    .eq("id", targetProfile.id);
-
-  if (error) return { error: error.message };
-
-  revalidatePath(`/u/${targetUsername}`);
-  return {};
-}
 
 export async function voteThread(formData: FormData) {
   if (!isSupabaseConfigured()) {

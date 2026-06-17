@@ -488,6 +488,7 @@ export async function fetchProfile(username: string): Promise<User | null> {
   if (!profile) return null;
 
   return {
+    id: profile.id,
     username: profile.username,
     displayName: profile.display_name,
     bio: profile.bio,
@@ -521,6 +522,7 @@ export async function fetchRecommendedUsers(limit = 3): Promise<User[]> {
     .limit(limit);
 
   return ((data ?? []) as DbProfile[]).map((profile) => ({
+    id: profile.id,
     username: profile.username,
     displayName: profile.display_name,
     bio: profile.bio,

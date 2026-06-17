@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { RankBadge } from "@/components/RankBadge";
-import { RateRankButton } from "@/components/RateRankButton";
 import { achievementBadges } from "@/lib/data";
 import { fetchLeaderboard } from "@/lib/forum/queries";
 import { getSessionUser } from "@/lib/actions/auth";
@@ -80,12 +79,10 @@ export default async function RankingsPage() {
 
           <aside className="space-y-6">
             <div className="rounded-xl border border-brand-purple-neon/30 bg-purple-900/20 p-5">
-              <h3 className="font-semibold text-white">Vote on ranks</h3>
-              <p className="mt-2 text-sm text-slate-300">
-                Community members vote on Rank 4 rank ratings. Progress tracker
-                updates weekly.
+              <h3 className="font-semibold text-white">Platform Ranks</h3>
+              <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                Ranks are awarded manually by system administrators to recognize notable contributions and achievements within the community.
               </p>
-              <RateRankButton isLoggedIn={!!user} />
             </div>
 
             <div>

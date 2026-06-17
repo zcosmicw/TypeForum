@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { updateUserRoleAction, toggleBanUserAction } from "@/lib/actions/admin";
+import { updateUserRoleAction, toggleBanUserAction, updateUserRankAction } from "@/lib/actions/admin";
 
 type AdminRowActionsProps = {
   targetUserId: string;
   targetUsername: string;
   currentRole: string;
+  currentRank: string;
   isBanned: boolean;
   currentUserRole: string;
   currentUserId: string;
@@ -16,11 +17,13 @@ export function AdminRowActions({
   targetUserId,
   targetUsername,
   currentRole,
+  currentRank,
   isBanned,
   currentUserRole,
   currentUserId,
 }: AdminRowActionsProps) {
   const [role, setRole] = useState(currentRole);
+  const [rank, setRank] = useState(currentRank);
   const [banned, setBanned] = useState(isBanned);
   const [isPending, startTransition] = useTransition();
 
@@ -33,6 +36,19 @@ export function AdminRowActions({
       } catch (err: any) {
         alert(err.message || "Failed to update role");
         setRole(currentRole); // revert on error
+      }
+    });
+  };
+
+  const handleRankChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newRank = e.target.value;
+    setRank(newRank);
+    startTransition(async () => {
+      try {
+        await updateUserRankAction(targetUserId, targetUsername, newRank);
+      } catch (err: any) {
+        alert(err.message || "Failed to update rank");
+        setRank(currentRank); // revert on error
       }
     });
   };
@@ -58,6 +74,26 @@ export function AdminRowActions({
 
   return (
     <div className="flex items-center gap-3">
+      {/* Rank Manager (Admins only) */}
+      {isAdminManger ? (
+        <select
+          value={rank}
+          onChange={handleRankChange}
+          disabled={isPending}
+          className="rounded-lg border border-white/10 bg-slate-900 px-2.5 py-1 text-xs font-semibold text-slate-300 outline-none transition-colors focus:border-brand-purple-neon disabled:opacity-50"
+        >
+          <option value="rank1">Rank 1</option>
+          <option value="rank2">Rank 2</option>
+          <option value="rank3">Rank 3</option>
+          <option value="rank4">Rank 4</option>
+          <option value="rank5">Rank 5</option>
+        </select>
+      ) : (
+        <span className="text-xs font-medium capitalize text-slate-500">
+          {rank}
+        </span>
+      )}
+
       {/* Role Manager (Admins only, cannot edit self) */}
       {isAdminManger ? (
         <select

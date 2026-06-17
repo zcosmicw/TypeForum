@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { RankBadge } from "@/components/RankBadge";
 import { ProfileActions } from "@/components/ProfileActions";
 import { fetchProfile } from "@/lib/forum/queries";
-import { getSessionUser } from "@/lib/actions/auth";
+import { getSessionUser, getSessionProfile } from "@/lib/actions/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -13,9 +13,10 @@ export default async function ProfilePage({
   params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
-  const [user, sessionUser] = await Promise.all([
+  const [user, sessionUser, sessionProfile] = await Promise.all([
     fetchProfile(username),
     getSessionUser(),
+    getSessionProfile(),
   ]);
 
   if (!user) {
@@ -56,8 +57,10 @@ export default async function ProfilePage({
                 <span>Joined {user.joinDate}</span>
               </div>
               <ProfileActions
+                targetUserId={user.id}
                 username={user.username}
-                rankVotes={user.rankVotes}
+                currentRank={user.userRank}
+                currentUserRole={sessionProfile?.role ?? null}
                 isLoggedIn={!!sessionUser}
               />
             </div>
