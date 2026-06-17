@@ -37,7 +37,7 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
   const [isSending, setIsSending] = useState(false);
 
   // References used to interact directly with DOM elements
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const profilesCacheRef = useRef<Record<string, ChatProfile>>({});
 
   // Keep the reference synchronized with the profile cache state.
@@ -48,7 +48,12 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
 
   // Hook to scroll the chat box to the latest message whenever messages change
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: scrollContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   };
 
   useEffect(() => {
@@ -197,7 +202,10 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
       </div>
 
       {/* Messages Scroll Box */}
-      <div className="h-64 sm:h-72 overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-white/10">
+      <div 
+        ref={scrollContainerRef}
+        className="h-64 sm:h-72 overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-white/10"
+      >
         {messages.map((message) => {
           const profile = profilesCache[message.profile_id];
           return (
@@ -230,7 +238,6 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
             No messages yet. Start the conversation!
           </div>
         )}
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Send message form */}
