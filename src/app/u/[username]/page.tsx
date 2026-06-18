@@ -78,6 +78,7 @@ export default async function ProfilePage({
                 currentUserRole={sessionProfile?.role ?? null}
                 isLoggedIn={!!sessionUser}
                 initialIsFollowing={isFollowing}
+                isOwnProfile={sessionUser?.id === user.id}
               />
             </div>
           </div>

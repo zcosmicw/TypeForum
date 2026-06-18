@@ -21,6 +21,7 @@ interface ProfileActionsProps {
   currentUserRole: string | null;
   isLoggedIn: boolean;
   initialIsFollowing: boolean;
+  isOwnProfile?: boolean;
 }
 
 export function ProfileActions({
@@ -30,6 +31,7 @@ export function ProfileActions({
   currentUserRole,
   isLoggedIn,
   initialIsFollowing,
+  isOwnProfile = false,
 }: ProfileActionsProps) {
   const [followed, setFollowed] = useState(initialIsFollowing);
   const [rank, setRank] = useState<UserRank>(currentRank);
@@ -69,25 +71,29 @@ export function ProfileActions({
   return (
     <div className="mt-4 flex flex-col gap-2">
       <div className="flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          disabled={isPending}
-          onClick={handleFollow}
-          className={`rounded-lg px-4 py-2 text-sm font-semibold transition-all disabled:opacity-60 ${
-            followed
-              ? "border border-white/10 bg-slate-800 text-slate-100 hover:bg-slate-700"
-              : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)]"
-          }`}
-        >
-          {followed ? "Following ✓" : "Follow"}
-        </button>
-        
-        <a
-          href="/messages"
-          className="rounded-lg border border-white/10 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-white"
-        >
-          Message
-        </a>
+        {!isOwnProfile && (
+          <>
+            <button
+              type="button"
+              disabled={isPending}
+              onClick={handleFollow}
+              className={`rounded-lg px-4 py-2 text-sm font-semibold transition-all disabled:opacity-60 ${
+                followed
+                  ? "border border-white/10 bg-slate-800 text-slate-100 hover:bg-slate-700"
+                  : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)]"
+              }`}
+            >
+              {followed ? "Following ✓" : "Follow"}
+            </button>
+            
+            <a
+              href="/messages"
+              className="rounded-lg border border-white/10 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-white"
+            >
+              Message
+            </a>
+          </>
+        )}
 
         {/* Admin only rank assignment control */}
         {isAdmin && (

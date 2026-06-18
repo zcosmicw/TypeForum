@@ -297,6 +297,10 @@ export async function toggleFollowUserAction(targetUsername: string) {
 
   if (!targetProfile) return { error: "User not found." };
 
+  if (profile.id === targetProfile.id) {
+    return { error: "You cannot follow yourself." };
+  }
+
   // Check if already following
   const { data: existingFollow } = await supabase
     .from("follows")

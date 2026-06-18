@@ -44,3 +44,7 @@ drop trigger if exists on_follow_change on public.follows;
 create trigger on_follow_change
   after insert or delete on public.follows
   for each row execute function public.handle_follow_change();
+
+-- Prevent self-following via a check constraint
+alter table public.follows drop constraint if exists check_not_self_follow;
+alter table public.follows add constraint check_not_self_follow check (follower_id <> following_id);
