@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { AdSlot } from "@/components/AdSlot";
 import { CategoryCard } from "@/components/CategoryCard";
-import { FeedCard } from "@/components/FeedCard";
 import { ThreadRow } from "@/components/ThreadRow";
 import { GlobalChat } from "@/components/GlobalChat";
 import { getSessionProfile } from "@/lib/actions/auth";
@@ -9,17 +8,15 @@ import {
   fetchCategories,
   fetchRecentThreads,
   fetchTrendingThreads,
-  fetchFeedSorted,
 } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [categories, trending, recentThreads, trendingFeed, profile] = await Promise.all([
+  const [categories, trending, recentThreads, profile] = await Promise.all([
     fetchCategories(),
     fetchTrendingThreads(),
     fetchRecentThreads(5),
-    fetchFeedSorted("trending"),
     getSessionProfile(),
   ]);
 
@@ -88,38 +85,21 @@ export default async function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-8 sm:px-6">
-        <div className="grid gap-8 lg:grid-cols-2">
-          <div>
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-white">Trending</h2>
-              <Link href="/discover" className="text-sm font-medium text-brand-blue hover:text-white">
-                Discover →
-              </Link>
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-xl font-bold text-white">Trending</h2>
+          <Link href="/discover" className="text-sm font-medium text-brand-blue hover:text-white">
+            Discover →
+          </Link>
+        </div>
+        <div className="neon-border overflow-hidden rounded-xl glass-panel">
+          {trending.slice(0, 4).map((thread) => (
+            <ThreadRow key={thread.id} thread={thread} />
+          ))}
+          {trending.length === 0 && (
+            <div className="px-6 py-10 text-center text-sm text-slate-500">
+              No trending threads yet. Be the first to post.
             </div>
-            <div className="neon-border overflow-hidden rounded-xl glass-panel">
-              {trending.slice(0, 4).map((thread) => (
-                <ThreadRow key={thread.id} thread={thread} />
-              ))}
-              {trending.length === 0 && (
-                <div className="px-6 py-10 text-center text-sm text-slate-500">
-                  No trending threads yet. Be the first to post.
-                </div>
-              )}
-            </div>
-          </div>
-          <div>
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-white">Feed highlights</h2>
-              <Link href="/feed" className="text-sm font-medium text-brand-blue hover:text-white">
-                Full feed →
-              </Link>
-            </div>
-            <div className="grid gap-4">
-              {trendingFeed.slice(0, 2).map((post) => (
-                <FeedCard key={post.id} post={post} />
-              ))}
-            </div>
-          </div>
+          )}
         </div>
       </section>
 

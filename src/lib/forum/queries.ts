@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import type { DbPost, DbProfile, DbThread, PostRow, ThreadRow } from "@/lib/supabase/types";
-import type { Category, Post, Thread, ThreadTag, User, LeaderboardEntry, FeedPost, StoreProduct, Notification, Message } from "@/lib/types";
+import type { Category, Post, Thread, ThreadTag, User, LeaderboardEntry, StoreProduct, Notification, Message } from "@/lib/types";
 
 function formatRelativeTime(dateStr: string) {
   const date = new Date(dateStr);
@@ -569,34 +569,7 @@ export async function fetchLeaderboard(): Promise<LeaderboardEntry[]> {
   }));
 }
 
-export async function fetchFeedSorted(by: "hot" | "new" | "trending"): Promise<FeedPost[]> {
-  const supabase = await createClient();
-  if (!supabase) return [];
 
-  let query = supabase.from("feed_posts").select("*");
-
-  if (by === "trending") {
-    query = query.eq("trending", true);
-  } else if (by === "new") {
-    query = query.order("created_at", { ascending: false });
-  } else {
-    // hot (by likes)
-    query = query.order("likes", { ascending: false });
-  }
-
-  const { data } = await query;
-  return ((data ?? []) as any[]).map((post) => ({
-    id: post.id,
-    author: post.author,
-    type: post.type,
-    caption: post.caption,
-    likes: post.likes,
-    comments: post.comments,
-    shares: post.shares,
-    trending: post.trending,
-    createdAt: formatRelativeTime(post.created_at),
-  }));
-}
 
 export async function fetchProduct(slug: string): Promise<StoreProduct | null> {
   const supabase = await createClient();

@@ -87,17 +87,7 @@ export type User = {
   isBanned: boolean;
 };
 
-export type FeedPost = {
-  id: string;
-  author: string;
-  type: "photo" | "video" | "before-after";
-  caption: string;
-  likes: number;
-  comments: number;
-  shares: number;
-  trending: boolean;
-  createdAt: string;
-};
+
 
 export type StoreProduct = {
   slug: string;

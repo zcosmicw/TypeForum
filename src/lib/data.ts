@@ -11,7 +11,6 @@ export {
   fetchProfile,
   fetchRecommendedUsers,
   fetchLeaderboard,
-  fetchFeedSorted,
   fetchProduct,
   fetchProducts,
   fetchFeaturedProducts,
@@ -21,7 +20,6 @@ export {
   fetchMessages,
 
   // Aliases for backward compatibility
-  fetchFeedSorted as getFeedSorted,
   fetchProduct as getProduct,
   fetchFeaturedProducts as getFeaturedProducts,
   fetchUnreadNotificationCount as getUnreadNotificationCount,

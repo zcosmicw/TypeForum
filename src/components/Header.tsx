@@ -6,7 +6,6 @@ import { getUnreadMessageCount, getUnreadNotificationCount } from "@/lib/data";
 
 const navLinks = [
   { href: "/forums", label: "Forums" },
-  { href: "/feed", label: "Feed" },
   { href: "/discover", label: "Discover" },
   { href: "/rankings", label: "Rankings" },
   { href: "/store", label: "Store" },
