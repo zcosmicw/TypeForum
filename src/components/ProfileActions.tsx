@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { followUser } from "@/lib/actions/forum";
+import { toggleFollowUserAction } from "@/lib/actions/forum";
 import { updateUserRankAction } from "@/lib/actions/admin";
 import type { UserRank } from "@/lib/types";
 
@@ -20,6 +20,7 @@ interface ProfileActionsProps {
   currentRank: UserRank;
   currentUserRole: string | null;
   isLoggedIn: boolean;
+  initialIsFollowing: boolean;
 }
 
 export function ProfileActions({
@@ -28,8 +29,9 @@ export function ProfileActions({
   currentRank,
   currentUserRole,
   isLoggedIn,
+  initialIsFollowing,
 }: ProfileActionsProps) {
-  const [followed, setFollowed] = useState(false);
+  const [followed, setFollowed] = useState(initialIsFollowing);
   const [rank, setRank] = useState<UserRank>(currentRank);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -40,11 +42,13 @@ export function ProfileActions({
       return;
     }
     startTransition(async () => {
-      const fd = new FormData();
-      fd.set("username", username);
-      const result = await followUser(fd);
-      if (result?.error) setError(result.error);
-      else setFollowed(true);
+      setError(null);
+      const result = await toggleFollowUserAction(username);
+      if (result?.error) {
+        setError(result.error);
+      } else if (result?.success) {
+        setFollowed(!!result.isFollowing);
+      }
     });
   }
 
@@ -67,9 +71,13 @@ export function ProfileActions({
       <div className="flex flex-wrap items-center gap-2">
         <button
           type="button"
-          disabled={isPending || followed}
+          disabled={isPending}
           onClick={handleFollow}
-          className="rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)] disabled:opacity-60"
+          className={`rounded-lg px-4 py-2 text-sm font-semibold transition-all disabled:opacity-60 ${
+            followed
+              ? "border border-white/10 bg-slate-800 text-slate-100 hover:bg-slate-700"
+              : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)]"
+          }`}
         >
           {followed ? "Following ✓" : "Follow"}
         </button>

@@ -276,7 +276,7 @@ export async function votePost(formData: FormData) {
   return {};
 }
 
-export async function followUser(formData: FormData) {
+export async function toggleFollowUserAction(targetUsername: string) {
   if (!isSupabaseConfigured()) {
     return { error: getSupabaseEnvError() };
   }
@@ -284,9 +284,6 @@ export async function followUser(formData: FormData) {
   const profile = await getSessionProfile();
   if (!profile) return { error: "Login required." };
   if (profile.is_banned) return { error: "Your account is banned." };
-
-  const targetUsername = String(formData.get("username") ?? "");
-  if (!targetUsername) return { error: "Username required." };
 
   const supabase = await createClient();
   if (!supabase) return { error: getSupabaseEnvError() };
@@ -300,15 +297,40 @@ export async function followUser(formData: FormData) {
 
   if (!targetProfile) return { error: "User not found." };
 
-  const { error } = await supabase.from("follows").upsert(
-    { follower_id: profile.id, following_id: targetProfile.id },
-    { onConflict: "follower_id,following_id" },
-  );
+  // Check if already following
+  const { data: existingFollow } = await supabase
+    .from("follows")
+    .select("*")
+    .eq("follower_id", profile.id)
+    .eq("following_id", targetProfile.id)
+    .maybeSingle();
 
-  if (error) return { error: error.message };
+  let isNowFollowing = false;
+
+  if (existingFollow) {
+    // Unfollow
+    const { error } = await supabase
+      .from("follows")
+      .delete()
+      .eq("follower_id", profile.id)
+      .eq("following_id", targetProfile.id);
+
+    if (error) return { error: error.message };
+  } else {
+    // Follow
+    const { error } = await supabase
+      .from("follows")
+      .insert({
+        follower_id: profile.id,
+        following_id: targetProfile.id,
+      });
+
+    if (error) return { error: error.message };
+    isNowFollowing = true;
+  }
 
   revalidatePath(`/u/${targetUsername}`);
-  return {};
+  return { success: true, isFollowing: isNowFollowing };
 }
 
 

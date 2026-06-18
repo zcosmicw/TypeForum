@@ -4,6 +4,7 @@ import { RankBadge } from "@/components/RankBadge";
 import { ProfileActions } from "@/components/ProfileActions";
 import { fetchProfile } from "@/lib/forum/queries";
 import { getSessionUser, getSessionProfile } from "@/lib/actions/auth";
+import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,20 @@ export default async function ProfilePage({
 
   if (!user) {
     notFound();
+  }
+
+  let isFollowing = false;
+  if (sessionUser) {
+    const supabase = await createClient();
+    if (supabase) {
+      const { data: followRecord } = await supabase
+        .from("follows")
+        .select("*")
+        .eq("follower_id", sessionUser.id)
+        .eq("following_id", user.id)
+        .maybeSingle();
+      isFollowing = !!followRecord;
+    }
   }
 
   return (
@@ -62,6 +77,7 @@ export default async function ProfilePage({
                 currentRank={user.userRank}
                 currentUserRole={sessionProfile?.role ?? null}
                 isLoggedIn={!!sessionUser}
+                initialIsFollowing={isFollowing}
               />
             </div>
           </div>
