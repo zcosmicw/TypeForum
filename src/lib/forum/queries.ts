@@ -235,7 +235,7 @@ export async function fetchThreadsByCategory(
   if (!category) return [];
 
   let query = supabase
-    .from("threads")
+    .from(sort === "trending" ? "trending_threads" : "threads")
     .select(threadSelect)
     .eq("category_id", category.id);
 
@@ -252,9 +252,7 @@ export async function fetchThreadsByCategory(
   if (sort === "recent") {
     query = query.order("updated_at", { ascending: false });
   } else if (sort === "trending") {
-    query = query.or("trending.eq.true,pinned.eq.true").order("updated_at", {
-      ascending: false,
-    });
+    query = query.order("trending_score", { ascending: false });
   } else {
     query = query.order("created_at", { ascending: false });
   }
@@ -445,10 +443,9 @@ export async function fetchTrendingThreads(): Promise<Thread[]> {
   const supabase = await createClient();
   if (!supabase) return [];
   const { data } = await supabase
-    .from("threads")
+    .from("trending_threads")
     .select(threadSelect)
-    .or("trending.eq.true,pinned.eq.true")
-    .order("updated_at", { ascending: false })
+    .order("trending_score", { ascending: false })
     .limit(10);
 
   const enriched = await enrichThreads(data ?? []);

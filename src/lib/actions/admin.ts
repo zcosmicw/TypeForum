@@ -163,3 +163,22 @@ export async function updateUserRankAction(targetUserId: string, targetUsername:
   revalidatePath(`/u/${targetUsername}`);
   return { success: true };
 }
+
+export async function resetChatAction() {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) throw new Error("Unauthorized: Only admins can reset the chat");
+
+  const supabase = await createClient();
+  if (!supabase) throw new Error("Database not connected");
+
+  // Delete all rows in global_chat_messages table
+  const { error } = await supabase
+    .from("global_chat_messages")
+    .delete()
+    .neq("id", "00000000-0000-0000-0000-000000000000");
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/");
+  return { success: true };
+}

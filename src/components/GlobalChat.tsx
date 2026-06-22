@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { RankBadge } from "@/components/RankBadge";
 import type { UserRank } from "@/lib/types";
 import type { DbProfile } from "@/lib/supabase/types";
+import { resetChatAction } from "@/lib/actions/admin";
 
 // 1. Define the shape of a Chat Message from our database table
 interface ChatMessage {
@@ -35,6 +36,7 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
   // Use React state to hold the user's text input and sending state
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
 
   // References used to interact directly with DOM elements
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -154,6 +156,18 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
           }
         }
       )
+      .on(
+        "postgres_changes",
+        {
+          event: "DELETE",
+          schema: "public",
+          table: "global_chat_messages",
+        },
+        (payload) => {
+          const oldMessageId = payload.old.id;
+          setMessages((prev) => prev.filter((m) => m.id !== oldMessageId));
+        }
+      )
       .subscribe((status, err) => {
         console.log("Realtime subscription status:", status, err);
       });
@@ -189,6 +203,21 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
     setIsSending(false);
   };
 
+  const handleResetChat = async () => {
+    if (!window.confirm("Are you sure you want to delete ALL messages in the global chat?")) {
+      return;
+    }
+    setIsResetting(true);
+    try {
+      await resetChatAction();
+      setMessages([]);
+    } catch (err: any) {
+      alert(err.message || "Failed to reset chat");
+    } finally {
+      setIsResetting(false);
+    }
+  };
+
   return (
     <div className="neon-border overflow-hidden rounded-xl glass-panel">
       {/* Chat header */}
@@ -200,7 +229,18 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
           </span>
           <h3 className="text-sm font-bold tracking-wide text-white uppercase">Global Chat Room</h3>
         </div>
-        <span className="text-xs text-slate-400 font-medium">Real-time discussion</span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-slate-400 font-medium">Real-time discussion</span>
+          {currentUserProfile?.role === "admin" && (
+            <button
+              onClick={handleResetChat}
+              disabled={isResetting}
+              className="rounded bg-red-950/60 border border-red-500/30 px-2 py-0.5 text-[10px] font-bold text-red-400 hover:bg-red-900/40 disabled:opacity-50 transition-all cursor-pointer"
+            >
+              {isResetting ? "Resetting..." : "Reset Chat"}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Messages Scroll Box */}
