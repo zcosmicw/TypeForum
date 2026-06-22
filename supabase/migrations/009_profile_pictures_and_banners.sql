@@ -14,8 +14,6 @@ VALUES ('banners', 'banners', true)
 ON CONFLICT (id) DO NOTHING;
 
 -- 3. Set up RLS policies for storage buckets
-ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
-
 DO $$
 BEGIN
   IF NOT EXISTS (
