@@ -94,9 +94,20 @@ export async function Header() {
                 </Link>
                 <Link
                   href={`/u/${profile.username}`}
-                  className="hidden rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-all hover:bg-white/5 hover:text-white sm:block"
+                  className="hidden items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-all hover:bg-white/5 hover:text-white sm:flex"
                 >
-                  @{profile.username}
+                  {profile.avatar_url ? (
+                    <img
+                      src={profile.avatar_url}
+                      alt=""
+                      className="h-5 w-5 rounded-full object-cover border border-white/10"
+                    />
+                  ) : (
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-[9px] font-bold text-white uppercase">
+                      {profile.display_name.charAt(0)}
+                    </span>
+                  )}
+                  <span>@{profile.username}</span>
                 </Link>
                 <SignOutButton />
               </>

@@ -40,47 +40,75 @@ export default async function ProfilePage({
 
   return (
     <div className="flex-1">
-      <div className="hero-gradient border-b border-white/10">
-        <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
-            <span className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-3xl font-bold text-white shadow-lg">
-              {user.displayName.charAt(0)}
-            </span>
-            <div className="flex-1">
-              <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-2xl font-bold text-white sm:text-3xl">
-                  {user.displayName}
-                </h1>
-                <RankBadge rank={user.userRank} />
-              </div>
-              <p className="mt-1 text-sm text-slate-500">@{user.username}</p>
-              <p className="mt-3 max-w-xl leading-relaxed text-slate-300">
-                {user.bio || "No bio yet."}
-              </p>
-              <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-500">
-                <span>
-                  <strong className="text-white">{user.postCount}</strong> posts
-                </span>
-                <span>
-                  <strong className="text-white">{user.followerCount}</strong>{" "}
-                  followers
-                </span>
-                <span>
-                  <strong className="text-white">{user.followingCount}</strong>{" "}
-                  following
-                </span>
-                <span>Joined {user.joinDate}</span>
-              </div>
-              <ProfileActions
-                targetUserId={user.id}
-                username={user.username}
-                currentRank={user.userRank}
-                currentUserRole={sessionProfile?.role ?? null}
-                isLoggedIn={!!sessionUser}
-                initialIsFollowing={isFollowing}
-                isOwnProfile={sessionUser?.id === user.id}
+      {/* Banner Container */}
+      <div className="relative h-44 w-full overflow-hidden bg-slate-900 border-b border-white/10">
+        {user.bannerUrl ? (
+          <img
+            src={user.bannerUrl}
+            alt={`${user.displayName}'s banner`}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 via-purple-900/40 to-pink-900/40 opacity-70" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" />
+      </div>
+
+      <div className="mx-auto max-w-4xl px-4 pb-10 sm:px-6">
+        <div className="relative -mt-16 flex flex-col gap-6 sm:flex-row sm:items-end">
+          {/* Avatar Picture */}
+          <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-2xl border-4 border-slate-950 bg-gradient-to-r from-blue-600 to-purple-600 shadow-xl flex items-center justify-center">
+            {user.avatarUrl ? (
+              <img
+                src={user.avatarUrl}
+                alt={`${user.displayName}'s avatar`}
+                className="h-full w-full object-cover"
               />
+            ) : (
+              <span className="text-4xl font-bold text-white">
+                {user.displayName.charAt(0).toUpperCase()}
+              </span>
+            )}
+          </div>
+
+          <div className="flex-1 pb-2">
+            <div className="flex flex-wrap items-center gap-3">
+              <h1 className="text-2xl font-bold text-white sm:text-3xl">
+                {user.displayName}
+              </h1>
+              <RankBadge rank={user.userRank} />
             </div>
+            <p className="mt-1 text-sm text-slate-400 font-medium">@{user.username}</p>
+          </div>
+        </div>
+
+        {/* Profile Bio & Action row */}
+        <div className="mt-6 border-b border-white/5 pb-6">
+          <p className="max-w-2xl leading-relaxed text-slate-300">
+            {user.bio || "No bio yet."}
+          </p>
+          <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-500">
+            <span>
+              <strong className="text-white">{user.postCount}</strong> posts
+            </span>
+            <span>
+              <strong className="text-white">{user.followerCount}</strong> followers
+            </span>
+            <span>
+              <strong className="text-white">{user.followingCount}</strong> following
+            </span>
+            <span>Joined {user.joinDate}</span>
+          </div>
+          <div className="mt-5">
+            <ProfileActions
+              targetUserId={user.id}
+              username={user.username}
+              currentRank={user.userRank}
+              currentUserRole={sessionProfile?.role ?? null}
+              isLoggedIn={!!sessionUser}
+              initialIsFollowing={isFollowing}
+              isOwnProfile={sessionUser?.id === user.id}
+            />
           </div>
         </div>
       </div>

@@ -14,6 +14,8 @@ export type DbProfile = {
   created_at: string;
   role: string;
   is_banned: boolean;
+  avatar_url?: string;
+  banner_url?: string;
 };
 
 export type DbCategory = {

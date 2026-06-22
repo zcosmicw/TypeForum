@@ -85,6 +85,8 @@ export type User = {
   };
   role: UserRole;
   isBanned: boolean;
+  avatarUrl?: string;
+  bannerUrl?: string;
 };
 
 

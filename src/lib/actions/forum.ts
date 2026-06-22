@@ -208,6 +208,8 @@ export async function updateProfile(
 
   const displayName = String(formData.get("displayName") ?? "").trim();
   const bio = String(formData.get("bio") ?? "").trim();
+  const avatarUrl = String(formData.get("avatarUrl") ?? "").trim() || null;
+  const bannerUrl = String(formData.get("bannerUrl") ?? "").trim() || null;
 
   if (!displayName) return { error: "Display name is required." };
 
@@ -216,7 +218,12 @@ export async function updateProfile(
 
   const { error } = await supabase
     .from("profiles")
-    .update({ display_name: displayName, bio })
+    .update({
+      display_name: displayName,
+      bio,
+      avatar_url: avatarUrl,
+      banner_url: bannerUrl,
+    })
     .eq("id", profile.id);
 
   if (error) return { error: error.message };

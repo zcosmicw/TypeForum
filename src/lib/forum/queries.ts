@@ -506,6 +506,8 @@ export async function fetchProfile(username: string): Promise<User | null> {
     },
     role: (profile.role ?? "user") as User["role"],
     isBanned: profile.is_banned ?? false,
+    avatarUrl: profile.avatar_url ?? undefined,
+    bannerUrl: profile.banner_url ?? undefined,
   };
 }
 
@@ -540,6 +542,8 @@ export async function fetchRecommendedUsers(limit = 3): Promise<User[]> {
     },
     role: (profile.role ?? "user") as User["role"],
     isBanned: profile.is_banned ?? false,
+    avatarUrl: profile.avatar_url ?? undefined,
+    bannerUrl: profile.banner_url ?? undefined,
   }));
 }
 
