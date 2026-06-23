@@ -3,6 +3,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { SignOutButton } from "@/components/SignOutButton";
 import { getSessionProfile } from "@/lib/actions/auth";
 import { getUnreadMessageCount, getUnreadNotificationCount } from "@/lib/data";
+import { createClient } from "@/lib/supabase/server";
 
 const navLinks = [
   { href: "/forums", label: "Forums" },
