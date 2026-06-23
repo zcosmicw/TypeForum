@@ -21,41 +21,55 @@ export default async function ForumsPage() {
         description="Category 1, Category 2, Category 3, Category 4, Category 5, and more — pick your lane."
       />
 
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-          <h2 className="mb-4 text-lg font-bold text-white">Categories</h2>
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 space-y-10">
+        
+        {/* Categories Section (Full Width Responsive Grid) */}
+        <section>
+          <h2 className="mb-4 text-xl font-bold tracking-tight text-white">
+            Categories
+          </h2>
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {categories.map((category) => (
               <CategoryCard key={category.slug} category={category} />
             ))}
           </div>
+        </section>
 
-          <div className="mt-10">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-white">
-                Pinned & trending
-              </h2>
-              <Link href="/discover" className="text-sm font-medium text-brand-blue">
-                View all →
-              </Link>
-            </div>
-            <div className="neon-border overflow-hidden rounded-xl glass-panel">
-              {trending.map((thread) => (
-                <ThreadRow key={thread.id} thread={thread} />
-              ))}
-              {trending.length === 0 && (
-                <div className="px-6 py-10 text-center text-sm text-slate-400">
-                  No trending threads yet.
-                </div>
-              )}
-            </div>
+        {/* Center Banner Advertisement Slot */}
+        <AdSlot variant="banner" />
+
+        {/* Pinned & Trending Threads Section */}
+        <section>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-xl font-bold tracking-tight text-white">
+              Pinned & trending
+            </h2>
+            <Link 
+              href="/discover" 
+              className="text-sm font-semibold text-brand-blue hover:text-white transition-colors"
+            >
+              View all trending →
+            </Link>
           </div>
+          
+          <div className="neon-border overflow-hidden rounded-xl glass-panel">
+            {trending.map((thread) => (
+              <ThreadRow key={thread.id} thread={thread} />
+            ))}
+            {trending.length === 0 && (
+              <div className="px-6 py-12 text-center text-sm text-slate-500 bg-slate-950/20">
+                No trending threads yet. Be the first to start a conversation!
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Bottom Horizontal Ads Stack */}
+        <div className="grid gap-4 md:grid-cols-2">
+          <AdSlot variant="in-feed" />
+          <AdSlot variant="in-feed" label="Affiliate" />
         </div>
 
-        <aside className="space-y-6">
-          <AdSlot variant="sidebar" />
-          <AdSlot variant="sidebar" label="Affiliate" />
-        </aside>
       </div>
     </div>
   );
