@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SearchBar } from "@/components/SearchBar";
 import { SignOutButton } from "@/components/SignOutButton";
 import { getSessionProfile } from "@/lib/actions/auth";
-import { getUnreadMessageCount, getUnreadNotificationCount } from "@/lib/data";
+import { getUnreadNotificationCount } from "@/lib/data";
 import { createClient } from "@/lib/supabase/server";
 
 const navLinks = [
@@ -13,7 +13,6 @@ const navLinks = [
 export async function Header() {
   const profile = await getSessionProfile();
   const unreadNotifications = await getUnreadNotificationCount();
-  const unreadMessages = await getUnreadMessageCount();
 
   const supabase = await createClient();
   const siteSettings = supabase
@@ -73,18 +72,7 @@ export async function Header() {
                     </span>
                   )}
                 </Link>
-                <Link
-                  href="/messages"
-                  className="relative rounded-lg p-2 text-slate-400 transition-all hover:bg-white/5 hover:text-white"
-                  aria-label="Messages"
-                >
-                  ✉
-                  {unreadMessages > 0 && (
-                    <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
-                      {unreadMessages}
-                    </span>
-                  )}
-                </Link>
+
                 {(profile.role === "admin" || profile.role === "moderator") && (
                   <Link
                     href="/admin"

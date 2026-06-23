@@ -85,13 +85,6 @@ export function ProfileActions({
             >
               {followed ? "Following ✓" : "Follow"}
             </button>
-            
-            <a
-              href="/messages"
-              className="rounded-lg border border-white/10 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-white"
-            >
-              Message
-            </a>
           </>
         )}
 
