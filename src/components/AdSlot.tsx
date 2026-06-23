@@ -56,9 +56,6 @@ export async function AdSlot({ variant = "banner", label = "Sponsored" }: AdSlot
           {variant === "sidebar" && "Sidebar ad placement"}
           {variant === "in-feed" && "In-feed sponsored content"}
         </p>
-        <p className="mt-2 text-xs text-brand-purple-soft">
-          Premium members see fewer ads
-        </p>
       </div>
     </div>
   );

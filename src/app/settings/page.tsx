@@ -19,7 +19,7 @@ export default async function SettingsPage() {
       <PageHero
         eyebrow="Account settings"
         title="Settings"
-        description="Manage your profile, privacy, notifications, premium, and saved drafts."
+        description="Manage your profile, privacy, notifications, and saved drafts."
       />
 
       <div className="mx-auto max-w-2xl space-y-6 px-4 py-10 sm:px-6">
@@ -46,7 +46,6 @@ export default async function SettingsPage() {
           <ul className="mt-3 space-y-2 text-sm text-slate-500">
             <li>Privacy & DM permissions</li>
             <li>Notification preferences</li>
-            <li>Premium membership & billing</li>
             <li>Saved thread drafts</li>
           </ul>
         </section>

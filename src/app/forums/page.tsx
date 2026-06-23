@@ -54,18 +54,6 @@ export default async function ForumsPage() {
 
         <aside className="space-y-6">
           <AdSlot variant="sidebar" />
-          <div className="rounded-xl border border-brand-purple-neon/30 bg-purple-900/20 glass-panel p-5">
-            <h3 className="font-semibold text-white">Premium membership</h3>
-            <p className="mt-2 text-sm text-slate-300">
-              Ad-free browsing, exclusive badges, and priority thread placement.
-            </p>
-            <button
-              type="button"
-              className="btn-premium-primary mt-4 w-full rounded-lg py-2.5 text-sm font-semibold text-white shadow-md transition-all"
-            >
-              Upgrade — $9.99/mo
-            </button>
-          </div>
           <AdSlot variant="sidebar" label="Affiliate" />
         </aside>
       </div>
