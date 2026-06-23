@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import { getSessionProfile } from "@/lib/actions/auth";
 import { AdminRowActions } from "@/components/AdminRowActions";
 import { AdminAdSettingsForm } from "@/components/AdminAdSettingsForm";
+import { AdminForumConfigForm } from "@/components/AdminForumConfigForm";
+import { AdminRanksConfigForm } from "@/components/AdminRanksConfigForm";
 
 export const dynamic = "force-dynamic";
 
@@ -18,10 +20,19 @@ export default async function AdminDashboardPage() {
   const supabase = await createClient();
   if (!supabase) throw new Error("Database not connected");
 
-  // Fetch ad settings and profiles
-  const [ { data: adConfig }, { data: dbProfiles } ] = await Promise.all([
+  // Fetch ad settings, profiles, categories, subforums, and ranks
+  const [
+    { data: adConfig },
+    { data: dbProfiles },
+    { data: categories },
+    { data: subforums },
+    { data: ranks },
+  ] = await Promise.all([
     supabase.from("ad_config").select("enabled, image_url").eq("id", 1).maybeSingle(),
     supabase.from("profiles").select("*").order("created_at", { ascending: false }),
+    supabase.from("categories").select("id, name, slug").order("sort_order"),
+    supabase.from("subforums").select("id, category_id, name, slug"),
+    supabase.from("rank_config").select("rank_key, label").order("rank_key"),
   ]);
 
   const usersList = (dbProfiles || []).map((p) => ({
@@ -44,7 +55,7 @@ export default async function AdminDashboardPage() {
               Admin Panel
             </h1>
             <p className="mt-1.5 text-sm text-slate-500">
-              Manage user roles, ban statuses, ad space configurations, and audit activities.
+              Manage user roles, ban statuses, ad space configurations, categories, subforums, and rank titles.
             </p>
           </div>
           <Link
@@ -58,6 +69,19 @@ export default async function AdminDashboardPage() {
         {/* Global Ad Banner Settings (Admins Only) */}
         {currentProfile.role === "admin" && (
           <AdminAdSettingsForm initialConfig={adConfig || null} />
+        )}
+
+        {/* Categories & Subforums Editor (Admins Only) */}
+        {currentProfile.role === "admin" && (
+          <AdminForumConfigForm
+            categories={categories || []}
+            subforums={subforums || []}
+          />
+        )}
+
+        {/* Custom User Rank Titles (Admins Only) */}
+        {currentProfile.role === "admin" && (
+          <AdminRanksConfigForm initialRanks={ranks || []} />
         )}
 
         {/* User Management Table Card */}

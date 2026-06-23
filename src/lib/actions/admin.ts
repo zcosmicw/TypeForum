@@ -206,3 +206,70 @@ export async function updateAdConfigAction(enabled: boolean, imageUrl: string | 
   revalidatePath("/admin");
   return { success: true };
 }
+
+export async function updateCategoryAction(id: string, name: string, slug: string) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) throw new Error("Unauthorized: Only admins can manage categories");
+
+  const supabase = await createClient();
+  if (!supabase) throw new Error("Database not connected");
+
+  const { error } = await supabase
+    .from("categories")
+    .update({ name, slug })
+    .eq("id", id);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/");
+  revalidatePath("/forums");
+  revalidatePath("/admin");
+  return { success: true };
+}
+
+export async function updateSubforumAction(id: string, name: string, slug: string) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) throw new Error("Unauthorized: Only admins can manage subforums");
+
+  const supabase = await createClient();
+  if (!supabase) throw new Error("Database not connected");
+
+  const { error } = await supabase
+    .from("subforums")
+    .update({ name, slug })
+    .eq("id", id);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/");
+  revalidatePath("/forums");
+  revalidatePath("/admin");
+  return { success: true };
+}
+
+export async function updateRankLabelsAction(labels: Record<string, string>) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) throw new Error("Unauthorized: Only admins can manage rank labels");
+
+  const supabase = await createClient();
+  if (!supabase) throw new Error("Database not connected");
+
+  const updates = Object.entries(labels).map(([key, label]) => {
+    return supabase
+      .from("rank_config")
+      .upsert({
+        rank_key: key,
+        label,
+        updated_at: new Date().toISOString(),
+      });
+  });
+
+  const results = await Promise.all(updates);
+  const failed = results.find((r) => r.error);
+  if (failed) throw new Error(failed.error?.message || "Failed to update one or more rank labels");
+
+  revalidatePath("/");
+  revalidatePath("/forums");
+  revalidatePath("/admin");
+  return { success: true };
+}
