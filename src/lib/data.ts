@@ -10,18 +10,12 @@ export {
   searchThreads,
   fetchProfile,
   fetchRecommendedUsers,
-  fetchLeaderboard,
-  fetchProduct,
-  fetchProducts,
-  fetchFeaturedProducts,
   fetchNotifications,
   fetchUnreadNotificationCount,
   fetchUnreadMessageCount,
   fetchMessages,
 
   // Aliases for backward compatibility
-  fetchProduct as getProduct,
-  fetchFeaturedProducts as getFeaturedProducts,
   fetchUnreadNotificationCount as getUnreadNotificationCount,
   fetchUnreadMessageCount as getUnreadMessageCount,
 } from "@/lib/forum/queries";

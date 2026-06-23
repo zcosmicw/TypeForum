@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import type { DbPost, DbProfile, DbThread, PostRow, ThreadRow } from "@/lib/supabase/types";
-import type { Category, Post, Thread, ThreadTag, User, LeaderboardEntry, StoreProduct, Notification, Message } from "@/lib/types";
+import type { Category, Post, Thread, ThreadTag, User, Notification, Message } from "@/lib/types";
 
 function formatRelativeTime(dateStr: string) {
   const date = new Date(dateStr);
@@ -547,102 +547,6 @@ export async function fetchRecommendedUsers(limit = 3): Promise<User[]> {
   }));
 }
 
-export async function fetchLeaderboard(): Promise<LeaderboardEntry[]> {
-  const supabase = await createClient();
-  if (!supabase) return [];
-  const { data } = await supabase
-    .from("profiles")
-    .select("username, rank, post_count, helpful_votes, rank_votes")
-    .order("helpful_votes", { ascending: false })
-    .limit(10);
-
-  type LeaderboardRow = Pick<
-    DbProfile,
-    "username" | "rank" | "post_count" | "helpful_votes" | "rank_votes"
-  >;
-
-  return ((data ?? []) as LeaderboardRow[]).map((p, i) => ({
-    rank: i + 1,
-    username: p.username,
-    userRank: p.rank as User["userRank"],
-    score: p.helpful_votes * 10 + p.post_count + p.rank_votes * 5,
-    progressDelta: (i % 7) + 2,
-  }));
-}
-
-
-
-export async function fetchProduct(slug: string): Promise<StoreProduct | null> {
-  const supabase = await createClient();
-  if (!supabase) return null;
-
-  const { data } = await supabase
-    .from("products")
-    .select("*")
-    .eq("slug", slug)
-    .single();
-
-  if (!data) return null;
-
-  return {
-    slug: data.slug,
-    name: data.name,
-    category: data.category as any,
-    price: Number(data.price),
-    rating: Number(data.rating),
-    reviewCount: data.review_count,
-    description: data.description,
-    featured: data.featured,
-    sponsored: data.sponsored,
-    affiliate: data.affiliate,
-  };
-}
-
-export async function fetchProducts(): Promise<StoreProduct[]> {
-  const supabase = await createClient();
-  if (!supabase) return [];
-
-  const { data } = await supabase
-    .from("products")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  return (data ?? []).map((p) => ({
-    slug: p.slug,
-    name: p.name,
-    category: p.category as any,
-    price: Number(p.price),
-    rating: Number(p.rating),
-    reviewCount: p.review_count,
-    description: p.description,
-    featured: p.featured,
-    sponsored: p.sponsored,
-    affiliate: p.affiliate,
-  }));
-}
-
-export async function fetchFeaturedProducts(): Promise<StoreProduct[]> {
-  const supabase = await createClient();
-  if (!supabase) return [];
-
-  const { data } = await supabase
-    .from("products")
-    .select("*")
-    .or("featured.eq.true,sponsored.eq.true");
-
-  return (data ?? []).map((p) => ({
-    slug: p.slug,
-    name: p.name,
-    category: p.category as any,
-    price: Number(p.price),
-    rating: Number(p.rating),
-    reviewCount: p.review_count,
-    description: p.description,
-    featured: p.featured,
-    sponsored: p.sponsored,
-    affiliate: p.affiliate,
-  }));
-}
 
 export async function fetchNotifications(): Promise<Notification[]> {
   const supabase = await createClient();

@@ -47,12 +47,6 @@ export default async function Home() {
             >
               Join TypeForum
             </Link>
-            <Link
-              href="/rankings"
-              className="btn-premium-secondary rounded-lg px-6 py-3 text-sm font-semibold text-slate-100 transition-all border border-brand-purple-neon/20"
-            >
-              Leaderboard
-            </Link>
           </div>
         </div>
       </section>

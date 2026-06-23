@@ -91,26 +91,6 @@ export type User = {
 
 
 
-export type StoreProduct = {
-  slug: string;
-  name: string;
-  category: "category-1" | "category-2" | "category-3" | "category-4";
-  price: number;
-  rating: number;
-  reviewCount: number;
-  description: string;
-  featured?: boolean;
-  sponsored?: boolean;
-  affiliate?: boolean;
-};
-
-export type LeaderboardEntry = {
-  rank: number;
-  username: string;
-  userRank: UserRank;
-  score: number;
-  progressDelta: number;
-};
 
 export type Notification = {
   id: string;
