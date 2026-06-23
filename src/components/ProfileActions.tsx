@@ -95,6 +95,15 @@ export function ProfileActions({
           </>
         )}
 
+        {isOwnProfile && (
+          <a
+            href="/settings"
+            className="rounded-lg border border-white/10 bg-slate-900/60 hover:bg-slate-800 hover:text-white px-4 py-2 text-sm font-semibold text-slate-300 transition-all hover:scale-[1.02] hover:shadow-[0_0_12px_rgba(255,255,255,0.05)] cursor-pointer"
+          >
+            Edit
+          </a>
+        )}
+
         {/* Admin only rank assignment control */}
         {isAdmin && (
           <div className="flex items-center gap-2 rounded-lg border border-brand-purple-neon/30 bg-purple-900/20 px-3 py-1.5">
