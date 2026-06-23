@@ -273,3 +273,40 @@ export async function updateRankLabelsAction(labels: Record<string, string>) {
   revalidatePath("/admin");
   return { success: true };
 }
+
+export async function updateSiteSettingsAction(settings: {
+  site_name: string;
+  hero_eyebrow: string;
+  hero_title: string;
+  hero_description: string;
+  categories_description: string;
+  footer_main: string;
+  footer_sub: string;
+}) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) throw new Error("Unauthorized: Only admins can manage site settings");
+
+  const supabase = await createClient();
+  if (!supabase) throw new Error("Database not connected");
+
+  const { error } = await supabase
+    .from("site_settings")
+    .upsert({
+      id: 1,
+      site_name: settings.site_name,
+      hero_eyebrow: settings.hero_eyebrow,
+      hero_title: settings.hero_title,
+      hero_description: settings.hero_description,
+      categories_description: settings.categories_description,
+      footer_main: settings.footer_main,
+      footer_sub: settings.footer_sub,
+      updated_at: new Date().toISOString(),
+    });
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/");
+  revalidatePath("/forums");
+  revalidatePath("/admin");
+  return { success: true };
+}

@@ -14,20 +14,29 @@ export async function Header() {
   const unreadNotifications = await getUnreadNotificationCount();
   const unreadMessages = await getUnreadMessageCount();
 
+  const supabase = await createClient();
+  const { data: siteSettings } = supabase
+    ? await supabase.from("site_settings").select("site_name").eq("id", 1).maybeSingle()
+    : { data: null };
+  const siteName = siteSettings?.site_name || "TypeForum";
+  const logoInitials = siteName
+    .split(/\s+/)
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase() || "TF";
+
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-gray-950/70 backdrop-blur-md">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between gap-4">
           <Link href="/" className="group flex shrink-0 items-center gap-2.5">
             <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-sm font-bold text-white shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_22px_rgba(168,85,247,0.5)]">
-              MT
+              {logoInitials}
             </span>
             <div>
               <span className="text-lg font-bold tracking-tight text-white transition-colors group-hover:text-purple-300">
-                TypeForum
-              </span>
-              <span className="neon-purple ml-1.5 hidden text-xs font-semibold tracking-wider uppercase lg:inline">
-                ranking
+                {siteName}
               </span>
             </div>
           </Link>

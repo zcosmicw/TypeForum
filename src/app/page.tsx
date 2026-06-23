@@ -4,6 +4,7 @@ import { CategoryCard } from "@/components/CategoryCard";
 import { ThreadRow } from "@/components/ThreadRow";
 import { GlobalChat } from "@/components/GlobalChat";
 import { getSessionProfile } from "@/lib/actions/auth";
+import { createClient } from "@/lib/supabase/server";
 import {
   fetchCategories,
   fetchRecentThreads,
@@ -13,26 +14,49 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [categories, trending, recentThreads, profile] = await Promise.all([
+  const supabase = await createClient();
+  const [categories, trending, recentThreads, profile, siteSettingsResult] = await Promise.all([
     fetchCategories(),
     fetchTrendingThreads(),
     fetchRecentThreads(5),
     getSessionProfile(),
+    supabase.from("site_settings").select("*").eq("id", 1).maybeSingle(),
   ]);
+
+  const siteSettings = siteSettingsResult?.data;
+  const siteName = siteSettings?.site_name || "TypeForum";
+  const heroEyebrow = siteSettings?.hero_eyebrow || "Welcome to the town";
+  const heroTitle = siteSettings?.hero_title || "Welcome to the [ultimate discussion] platform.";
+  const heroDescription = siteSettings?.hero_description || "Topics, discussions, categories, rankings, and a store — all in one generic platform.";
+  const categoriesDescription = siteSettings?.categories_description || "Category 1, Category 2, Category 3, Category 4, and more.";
+
+  const renderHeroTitle = (title: string) => {
+    const parts = title.split(/(\[[^\]]+\])/g);
+    return parts.map((part, idx) => {
+      if (part.startsWith("[") && part.endsWith("]")) {
+        const cleanText = part.slice(1, -1);
+        return (
+          <span key={idx} className="neon-purple">
+            {cleanText}
+          </span>
+        );
+      }
+      return part;
+    });
+  };
 
   return (
     <div className="flex-1">
       <section className="hero-gradient border-b border-white/10">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
-            Welcome to the town
+            {heroEyebrow}
           </p>
           <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Welcome to the{" "}
-            <span className="neon-purple">ultimate discussion</span> platform.
+            {renderHeroTitle(heroTitle)}
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-300">
-            Topics, discussions, categories, rankings, and a store — all in one generic platform.
+            {heroDescription}
           </p>
           <div className="mt-8 flex flex-wrap gap-3.5">
             <Link
@@ -45,7 +69,7 @@ export default async function Home() {
               href="/signup"
               className="btn-premium-secondary rounded-lg px-6 py-3 text-sm font-semibold text-slate-100 transition-all"
             >
-              Join TypeForum
+              Join {siteName}
             </Link>
           </div>
         </div>
@@ -64,7 +88,7 @@ export default async function Home() {
           <div>
             <h2 className="text-xl font-bold text-white">Categories</h2>
             <p className="mt-1 text-sm text-slate-400">
-              Category 1, Category 2, Category 3, Category 4, and more.
+              {categoriesDescription}
             </p>
           </div>
           <Link href="/forums" className="text-sm font-medium text-brand-blue hover:text-white">
