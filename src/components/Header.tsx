@@ -22,7 +22,7 @@ export async function Header() {
   const siteName = siteSettings?.site_name || "TypeForum";
   const logoInitials = siteName
     .split(/\s+/)
-    .map((word) => word[0])
+    .map((word: string) => word[0])
     .join("")
     .slice(0, 2)
     .toUpperCase() || "TF";
