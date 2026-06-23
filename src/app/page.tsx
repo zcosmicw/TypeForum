@@ -15,15 +15,15 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const supabase = await createClient();
-  const [categories, trending, recentThreads, profile, siteSettingsResult] = await Promise.all([
+  const [categories, trending, recentThreads, profile, siteSettings] = await Promise.all([
     fetchCategories(),
     fetchTrendingThreads(),
     fetchRecentThreads(5),
     getSessionProfile(),
-    supabase.from("site_settings").select("*").eq("id", 1).maybeSingle(),
+    supabase
+      ? supabase.from("site_settings").select("*").eq("id", 1).maybeSingle().then((res) => res.data)
+      : Promise.resolve(null),
   ]);
-
-  const siteSettings = siteSettingsResult?.data;
   const siteName = siteSettings?.site_name || "TypeForum";
   const heroEyebrow = siteSettings?.hero_eyebrow || "Welcome to the town";
   const heroTitle = siteSettings?.hero_title || "Welcome to the [ultimate discussion] platform.";

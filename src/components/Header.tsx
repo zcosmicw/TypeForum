@@ -15,9 +15,9 @@ export async function Header() {
   const unreadMessages = await getUnreadMessageCount();
 
   const supabase = await createClient();
-  const { data: siteSettings } = supabase
-    ? await supabase.from("site_settings").select("site_name").eq("id", 1).maybeSingle()
-    : { data: null };
+  const siteSettings = supabase
+    ? await supabase.from("site_settings").select("site_name").eq("id", 1).maybeSingle().then((res) => res.data)
+    : null;
   const siteName = siteSettings?.site_name || "TypeForum";
   const logoInitials = siteName
     .split(/\s+/)

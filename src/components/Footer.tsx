@@ -2,9 +2,9 @@ import { createClient } from "@/lib/supabase/server";
 
 export async function Footer() {
   const supabase = await createClient();
-  const { data: siteSettings } = supabase
-    ? await supabase.from("site_settings").select("site_name, footer_main, footer_sub").eq("id", 1).maybeSingle()
-    : { data: null };
+  const siteSettings = supabase
+    ? await supabase.from("site_settings").select("site_name, footer_main, footer_sub").eq("id", 1).maybeSingle().then((res) => res.data)
+    : null;
 
   const siteName = siteSettings?.site_name || "TypeForum";
   const footerMain = siteSettings?.footer_main || "looks, health, and self-improvement.";
