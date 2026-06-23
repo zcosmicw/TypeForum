@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getSessionProfile } from "@/lib/actions/auth";
 import { AdminRowActions } from "@/components/AdminRowActions";
+import { AdminAdSettingsForm } from "@/components/AdminAdSettingsForm";
 
 export const dynamic = "force-dynamic";
 
@@ -17,10 +18,11 @@ export default async function AdminDashboardPage() {
   const supabase = await createClient();
   if (!supabase) throw new Error("Database not connected");
 
-  const { data: dbProfiles } = await supabase
-    .from("profiles")
-    .select("*")
-    .order("created_at", { ascending: false });
+  // Fetch ad settings and profiles
+  const [ { data: adConfig }, { data: dbProfiles } ] = await Promise.all([
+    supabase.from("ad_config").select("enabled, image_url").eq("id", 1).maybeSingle(),
+    supabase.from("profiles").select("*").order("created_at", { ascending: false }),
+  ]);
 
   const usersList = (dbProfiles || []).map((p) => ({
     id: p.id,
@@ -42,7 +44,7 @@ export default async function AdminDashboardPage() {
               Admin Panel
             </h1>
             <p className="mt-1.5 text-sm text-slate-500">
-              Manage user roles, ban statuses, and audit platform activities.
+              Manage user roles, ban statuses, ad space configurations, and audit activities.
             </p>
           </div>
           <Link
@@ -52,6 +54,11 @@ export default async function AdminDashboardPage() {
             ← Back to Forums
           </Link>
         </div>
+
+        {/* Global Ad Banner Settings (Admins Only) */}
+        {currentProfile.role === "admin" && (
+          <AdminAdSettingsForm initialConfig={adConfig || null} />
+        )}
 
         {/* User Management Table Card */}
         <div className="neon-border overflow-hidden rounded-xl border border-white/10 glass-panel shadow-sm">

@@ -182,3 +182,27 @@ export async function resetChatAction() {
   revalidatePath("/");
   return { success: true };
 }
+
+export async function updateAdConfigAction(enabled: boolean, imageUrl: string | null) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) throw new Error("Unauthorized: Only admins can manage ad settings");
+
+  const supabase = await createClient();
+  if (!supabase) throw new Error("Database not connected");
+
+  const { error } = await supabase
+    .from("ad_config")
+    .upsert({
+      id: 1,
+      enabled,
+      image_url: imageUrl,
+      updated_at: new Date().toISOString(),
+    });
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/");
+  revalidatePath("/forums");
+  revalidatePath("/admin");
+  return { success: true };
+}
