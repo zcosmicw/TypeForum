@@ -1,4 +1,3 @@
-import type { LeaderboardEntry } from "@/lib/types";
 
 export const rankLabels = {
   rank1: "Rank 1",
@@ -15,17 +14,6 @@ export const rankColors: Record<keyof typeof rankLabels, string> = {
   rank4: "bg-purple-200 text-purple-900",
   rank5: "bg-brand-purple-neon/15 text-brand-purple-neon",
 };
-
-export const leaderboard: LeaderboardEntry[] = [
-  { rank: 1, username: "User1", userRank: "rank5", score: 9840, progressDelta: 12 },
-  { rank: 2, username: "User2", userRank: "rank4", score: 8720, progressDelta: 8 },
-  { rank: 3, username: "User3", userRank: "rank4", score: 8012, progressDelta: 5 },
-  { rank: 4, username: "User4", userRank: "rank3", score: 7340, progressDelta: 14 },
-  { rank: 5, username: "User5", userRank: "rank3", score: 6891, progressDelta: 3 },
-  { rank: 6, username: "User6", userRank: "rank2", score: 6120, progressDelta: 9 },
-  { rank: 7, username: "User7", userRank: "rank2", score: 5804, progressDelta: 2 },
-  { rank: 8, username: "User8", userRank: "rank2", score: 5510, progressDelta: 6 },
-];
 
 export const achievementBadges = [
   { id: "first-log", label: "First Progress Log", description: "Posted your first transformation" },
