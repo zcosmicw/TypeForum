@@ -119,9 +119,9 @@ export default async function ProfilePage({
             <h2 className="mb-3 text-lg font-bold text-white">Stats</h2>
             <div className="grid grid-cols-3 gap-3">
               {[
-                { label: "Gym streak", value: user.stats.gymStreak },
-                { label: "Transformations", value: user.stats.transformations },
-                { label: "Helpful votes", value: user.stats.helpfulVotes },
+                { label: "Upvotes", value: user.stats.upvotes },
+                { label: "Comments", value: user.stats.comments },
+                { label: "Threads Created", value: user.stats.threadsCreated },
               ].map((stat) => (
                 <div
                   key={stat.label}

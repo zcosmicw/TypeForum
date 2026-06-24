@@ -484,6 +484,32 @@ export async function fetchProfile(username: string): Promise<User | null> {
 
   if (!profile) return null;
 
+  const [
+    threadsCreatedCount,
+    commentsCount,
+    userThreads,
+    userPosts,
+  ] = await Promise.all([
+    supabase.from("threads").select("*", { count: "exact", head: true }).eq("author_id", profile.id),
+    supabase.from("posts").select("*", { count: "exact", head: true }).eq("author_id", profile.id),
+    supabase.from("threads").select("id").eq("author_id", profile.id),
+    supabase.from("posts").select("id").eq("author_id", profile.id),
+  ]);
+
+  const threadIds = userThreads?.data?.map((t: any) => t.id) || [];
+  const postIds = userPosts?.data?.map((p: any) => p.id) || [];
+
+  const [threadVotesResult, postVotesResult] = await Promise.all([
+    threadIds.length > 0
+      ? supabase.from("thread_votes").select("*", { count: "exact", head: true }).in("thread_id", threadIds).eq("value", 1)
+      : Promise.resolve({ count: 0 }),
+    postIds.length > 0
+      ? supabase.from("post_votes").select("*", { count: "exact", head: true }).in("post_id", postIds).eq("value", 1)
+      : Promise.resolve({ count: 0 }),
+  ]);
+
+  const upvotes = (threadVotesResult.count ?? 0) + (postVotesResult.count ?? 0);
+
   return {
     id: profile.id,
     username: profile.username,
@@ -500,9 +526,9 @@ export async function fetchProfile(username: string): Promise<User | null> {
     rankVotes: profile.rank_votes,
     badges: [],
     stats: {
-      gymStreak: profile.gym_streak,
-      transformations: profile.transformations,
-      helpfulVotes: profile.helpful_votes,
+      upvotes,
+      comments: commentsCount.count ?? 0,
+      threadsCreated: threadsCreatedCount.count ?? 0,
     },
     role: (profile.role ?? "user") as User["role"],
     isBanned: profile.is_banned ?? false,
@@ -536,9 +562,9 @@ export async function fetchRecommendedUsers(limit = 3): Promise<User[]> {
     rankVotes: profile.rank_votes,
     badges: [],
     stats: {
-      gymStreak: profile.gym_streak,
-      transformations: profile.transformations,
-      helpfulVotes: profile.helpful_votes,
+      upvotes: 0,
+      comments: profile.post_count ?? 0,
+      threadsCreated: 0,
     },
     role: (profile.role ?? "user") as User["role"],
     isBanned: profile.is_banned ?? false,

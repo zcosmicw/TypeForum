@@ -79,9 +79,9 @@ export type User = {
   rankVotes: number;
   badges: UserBadge[];
   stats: {
-    gymStreak: number;
-    transformations: number;
-    helpfulVotes: number;
+    upvotes: number;
+    comments: number;
+    threadsCreated: number;
   };
   role: UserRole;
   isBanned: boolean;
