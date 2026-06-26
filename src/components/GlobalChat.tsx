@@ -7,7 +7,6 @@ import type { UserRank } from "@/lib/types";
 import type { DbProfile } from "@/lib/supabase/types";
 import { resetChatAction } from "@/lib/actions/admin";
 
-// 1. Define the shape of a Chat Message from our database table
 interface ChatMessage {
   id: string;
   profile_id: string;
@@ -15,7 +14,6 @@ interface ChatMessage {
   created_at: string;
 }
 
-// 2. Define the shape of the User Profile info we want to display next to the message
 interface ChatProfile {
   username: string;
   display_name: string;
@@ -23,32 +21,23 @@ interface ChatProfile {
 }
 
 interface GlobalChatProps {
-  currentUserProfile: DbProfile | null; // Passed from the server page (null if the visitor is logged out)
+  currentUserProfile: DbProfile | null;
 }
 
 export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  
-  // A local cache mapping profile IDs to profile details.
-  // This keeps us from querying Supabase for the same profile multiple times!
   const [profilesCache, setProfilesCache] = useState<Record<string, ChatProfile>>({});
-  
-  // Use React state to hold the user's text input and sending state
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
 
-  // References used to interact directly with DOM elements
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const profilesCacheRef = useRef<Record<string, ChatProfile>>({});
 
-  // Keep the reference synchronized with the profile cache state.
-  // This is a common TypeScript React trick to ensure real-time callbacks always read the fresh cache state.
   useEffect(() => {
     profilesCacheRef.current = profilesCache;
   }, [profilesCache]);
 
-  // Hook to scroll the chat box to the latest message whenever messages change
   const scrollToBottom = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTo({
@@ -62,13 +51,12 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
     scrollToBottom();
   }, [messages]);
 
-  // Hook 1: Fetch initial messages on page load
+  // load starting chat history
   useEffect(() => {
     async function fetchInitialMessages() {
       const supabase = createClient();
       if (!supabase) return;
 
-      // Query the latest 50 messages, joining profile information in one query
       const { data, error } = await supabase
         .from("global_chat_messages")
         .select("id, body, created_at, profile_id, profiles(username, display_name, rank)")
@@ -76,14 +64,12 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
         .limit(50);
 
       if (error) {
-        console.error("Error fetching chat messages:", error);
+        console.error(error);
         return;
       }
 
       if (data) {
-        // Since we fetched in descending order (newest first), reverse it to display chronologically (oldest at top)
         const sorted = [...data].reverse();
-
         const profileMap: Record<string, ChatProfile> = {};
         const messagesList: ChatMessage[] = [];
 
@@ -95,7 +81,6 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
             profile_id: item.profile_id,
           });
 
-          // If profiles relation exists, store it in our profile map
           if (item.profiles) {
             profileMap[item.profile_id] = {
               username: item.profiles.username,
@@ -105,7 +90,6 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
           }
         });
 
-        // Update states
         setProfilesCache((prev) => ({ ...prev, ...profileMap }));
         setMessages(messagesList);
       }
@@ -114,7 +98,7 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
     fetchInitialMessages();
   }, []);
 
-  // Hook 2: Subscribe to real-time additions (postgres_changes)
+  // listen to realtime chat inserts/deletes
   useEffect(() => {
     const supabase = createClient();
     if (!supabase) return;
@@ -130,11 +114,8 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
         },
         async (payload) => {
           const newMessage = payload.new as ChatMessage;
-
-          // Add message to chat list
           setMessages((prev) => [...prev, newMessage]);
 
-          // Fetch the profile for this user if we don't have it cached yet
           const cachedProfile = profilesCacheRef.current[newMessage.profile_id];
           if (!cachedProfile) {
             const { data: profile } = await supabase
@@ -168,17 +149,13 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
           setMessages((prev) => prev.filter((m) => m.id !== oldMessageId));
         }
       )
-      .subscribe((status, err) => {
-        console.log("Realtime subscription status:", status, err);
-      });
+      .subscribe();
 
-    // Clean up subscription when the component is destroyed
     return () => {
       supabase.removeChannel(channel);
     };
   }, []);
 
-  // Submitting a new message to the database
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isSending || !currentUserProfile) return;
@@ -196,7 +173,7 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
     });
 
     if (error) {
-      console.error("Error sending message:", error);
+      console.error(error);
     } else {
       setInput("");
     }
@@ -204,7 +181,7 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
   };
 
   const handleResetChat = async () => {
-    if (!window.confirm("Are you sure you want to delete ALL messages in the global chat?")) {
+    if (!window.confirm("reset the chat for real?")) {
       return;
     }
     setIsResetting(true);
@@ -212,7 +189,7 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
       await resetChatAction();
       setMessages([]);
     } catch (err: any) {
-      alert(err.message || "Failed to reset chat");
+      alert(err.message || "failed");
     } finally {
       setIsResetting(false);
     }
@@ -220,7 +197,6 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
 
   return (
     <div className="neon-border overflow-hidden rounded-xl glass-panel">
-      {/* Chat header */}
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-3.5 bg-white/[0.02]">
         <div className="flex items-center gap-2">
           <span className="relative flex h-2.5 w-2.5">
@@ -243,7 +219,6 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
         </div>
       </div>
 
-      {/* Messages Scroll Box */}
       <div 
         ref={scrollContainerRef}
         className="h-64 sm:h-72 overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-white/10"
@@ -282,7 +257,6 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
         )}
       </div>
 
-      {/* Send message form */}
       <div className="border-t border-white/10 p-3 bg-white/[0.01]">
         <form onSubmit={handleSendMessage} className="flex gap-2">
           <input
