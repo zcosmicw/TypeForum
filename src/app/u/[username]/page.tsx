@@ -49,7 +49,7 @@ export default async function ProfilePage({
             className="h-full w-full object-cover"
           />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 via-purple-900/40 to-pink-900/40 opacity-70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/40 via-teal-900/30 to-slate-900/40 opacity-70" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" />
       </div>
@@ -57,7 +57,7 @@ export default async function ProfilePage({
       <div className="mx-auto max-w-4xl px-4 pb-10 sm:px-6">
         <div className="relative -mt-16 flex flex-col gap-6 sm:flex-row sm:items-end">
           {/* Avatar Picture */}
-          <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-2xl border-4 border-slate-950 bg-gradient-to-r from-blue-600 to-purple-600 shadow-xl flex items-center justify-center">
+          <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-2xl border-4 border-slate-950 bg-gradient-to-r from-teal-600 to-teal-400 shadow-xl flex items-center justify-center">
             {user.avatarUrl ? (
               <img
                 src={user.avatarUrl}
@@ -125,9 +125,9 @@ export default async function ProfilePage({
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-xl border border-white/10 glass-panel p-4 text-center"
+                  className="rounded-xl border border-white/10 surface-panel p-4 text-center"
                 >
-                  <p className="text-2xl font-bold text-brand-blue">{stat.value}</p>
+                  <p className="text-2xl font-bold text-brand-teal">{stat.value}</p>
                   <p className="mt-1 text-xs text-slate-500">{stat.label}</p>
                 </div>
               ))}
@@ -142,7 +142,7 @@ export default async function ProfilePage({
               {user.badges.map((badge) => (
                 <div
                   key={badge.id}
-                  className="rounded-lg border border-white/10 glass-panel px-3 py-2"
+                  className="rounded-lg border border-white/10 surface-panel px-3 py-2"
                 >
                   <p className="text-sm font-medium text-white">{badge.label}</p>
                 </div>

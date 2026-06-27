@@ -15,7 +15,7 @@ export function AuthForm({ mode }: AuthFormProps) {
   const [state, formAction, pending] = useActionState(action, initialState);
 
   return (
-    <form action={formAction} className="neon-border space-y-4 rounded-xl border border-white/10 glass-panel p-6">
+    <form action={formAction} className="panel-border space-y-4 rounded-xl border border-white/10 surface-panel p-6">
       {mode === "signup" && (
         <>
           <div>
@@ -29,7 +29,7 @@ export function AuthForm({ mode }: AuthFormProps) {
               minLength={3}
               maxLength={20}
               pattern="[a-zA-Z0-9_]+"
-              className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-purple-neon focus:outline-none focus:ring-2 focus:ring-brand-purple-neon"
+              className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal"
               placeholder="user_123"
             />
           </div>
@@ -40,7 +40,7 @@ export function AuthForm({ mode }: AuthFormProps) {
             <input
               id="displayName"
               name="displayName"
-              className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-purple-neon focus:outline-none focus:ring-2 focus:ring-brand-purple-neon"
+              className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal"
               placeholder="Mog In Progress"
             />
           </div>
@@ -57,7 +57,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           type="email"
           required
           autoComplete="email"
-          className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-purple-neon focus:outline-none focus:ring-2 focus:ring-brand-purple-neon"
+          className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal"
           placeholder="you@email.com"
         />
       </div>
@@ -73,7 +73,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           required
           minLength={8}
           autoComplete={mode === "login" ? "current-password" : "new-password"}
-          className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-purple-neon focus:outline-none focus:ring-2 focus:ring-brand-purple-neon"
+          className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal"
           placeholder="At least 8 characters"
         />
       </div>
@@ -88,7 +88,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 py-2.5 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)] transition-all disabled:opacity-60"
+        className="w-full rounded-lg bg-gradient-to-r from-teal-600 to-teal-400 py-2.5 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_12px_rgba(45,212,191,0.3)] transition-all disabled:opacity-60"
       >
         {pending ? "Please wait…" : mode === "login" ? "Log in" : "Create account"}
       </button>
@@ -97,14 +97,14 @@ export function AuthForm({ mode }: AuthFormProps) {
         {mode === "login" ? (
           <>
             New here?{" "}
-            <Link href="/signup" className="font-medium text-brand-blue hover:text-white">
+            <Link href="/signup" className="font-medium text-brand-teal hover:text-white">
               Join TypeForum
             </Link>
           </>
         ) : (
           <>
             Already have an account?{" "}
-            <Link href="/login" className="font-medium text-brand-blue hover:text-white">
+            <Link href="/login" className="font-medium text-brand-teal hover:text-white">
               Log in
             </Link>
           </>

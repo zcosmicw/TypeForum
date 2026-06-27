@@ -45,7 +45,7 @@ export async function AdSlot({ variant = "banner", label = "Sponsored" }: AdSlot
 
   return (
     <div
-      className={`neon-border flex items-center justify-center rounded-xl border border-dashed border-white/10 bg-gradient-to-br from-slate-800 to-purple-900/20 ${styles[variant]}`}
+      className={`panel-border flex items-center justify-center rounded-xl border border-dashed border-white/10 bg-gradient-to-br from-slate-800 to-teal-900/15 ${styles[variant]}`}
     >
       <div className="text-center">
         <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">

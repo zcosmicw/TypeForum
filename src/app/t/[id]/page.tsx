@@ -37,7 +37,7 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
   return (
     <div className="flex-1 pb-20">
       {/* Thread Page Hero Header */}
-      <section className="hero-gradient border-b border-white/10">
+      <section className="hero-bg border-b border-white/10">
         <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
           {/* Breadcrumbs */}
           <div className="mb-4 flex flex-wrap items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
@@ -71,7 +71,7 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
                 Started by{" "}
                 <Link
                   href={`/u/${thread.author}`}
-                  className="font-bold text-brand-blue hover:text-white transition-colors"
+                  className="font-bold text-brand-teal hover:text-white transition-colors"
                 >
                   @{thread.author}
                 </Link>{" "}
@@ -108,7 +108,7 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
           {/* 2. Replies (Comments) Tree */}
           <div className="mt-12 pt-8 border-t border-white/5">
             <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
               Discussion ({thread.replies} Comments)
             </h2>
             

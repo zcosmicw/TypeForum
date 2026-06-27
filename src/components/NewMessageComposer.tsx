@@ -24,7 +24,7 @@ export function NewMessageComposer({ isLoggedIn }: { isLoggedIn: boolean }) {
     return (
       <div className="mt-6 rounded-xl border border-dashed border-white/10 bg-slate-800/30 px-6 py-8 text-center">
         <p className="text-sm text-slate-300">
-          <a href="/login" className="font-medium text-brand-blue hover:text-white">
+          <a href="/login" className="font-medium text-brand-teal hover:text-white">
             Log in
           </a>{" "}
           to send direct messages.
@@ -66,7 +66,7 @@ export function NewMessageComposer({ isLoggedIn }: { isLoggedIn: boolean }) {
                     onChange={(e) => setTo(e.target.value)}
                     placeholder="Username"
                     required
-                    className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-purple-neon focus:outline-none focus:ring-2 focus:ring-brand-purple-neon"
+                    className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal"
                   />
                 </div>
                 <div>
@@ -77,12 +77,12 @@ export function NewMessageComposer({ isLoggedIn }: { isLoggedIn: boolean }) {
                     required
                     rows={5}
                     placeholder="Type your message..."
-                    className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-purple-neon focus:outline-none focus:ring-2 focus:ring-brand-purple-neon"
+                    className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 py-2.5 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)]"
+                  className="w-full rounded-lg bg-gradient-to-r from-teal-600 to-teal-400 py-2.5 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_12px_rgba(45,212,191,0.3)]"
                 >
                   Send
                 </button>

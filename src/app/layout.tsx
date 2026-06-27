@@ -24,9 +24,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TypeForum — The Generic Community Platform",
+  title: "TypeForum",
   description:
-    "A community forum for discussions, categories, and self-improvement.",
+    "Community discussion boards — threads, categories, real-time chat, and more.",
 };
 
 export const dynamic = "force-dynamic";

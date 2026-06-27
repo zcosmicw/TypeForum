@@ -56,7 +56,7 @@ export function AdminRanksConfigForm({ initialRanks }: AdminRanksConfigFormProps
   };
 
   return (
-    <div className="neon-border rounded-xl border border-white/10 glass-panel p-5 mb-8">
+    <div className="panel-border rounded-xl border border-white/10 surface-panel p-5 mb-8">
       <h2 className="mb-4 font-semibold text-white">Custom User Rank Titles</h2>
       <p className="text-xs text-slate-500 mb-6">
         Customize the display titles for the platform's user ranks. These labels reflect immediately on all badges across the site.
@@ -87,7 +87,7 @@ export function AdminRanksConfigForm({ initialRanks }: AdminRanksConfigFormProps
                 value={ranks[key] ?? ""}
                 onChange={(e) => handleLabelChange(key, e.target.value)}
                 placeholder={`Name for ${key}`}
-                className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-1.5 text-xs focus:border-brand-purple-neon focus:outline-none focus:ring-1 focus:ring-brand-purple-neon"
+                className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-1.5 text-xs focus:border-brand-teal focus:outline-none focus:ring-1 focus:ring-brand-teal"
               />
             </div>
           </div>
@@ -98,7 +98,7 @@ export function AdminRanksConfigForm({ initialRanks }: AdminRanksConfigFormProps
         type="button"
         disabled={isPending}
         onClick={handleSave}
-        className="mt-6 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)] transition-all disabled:opacity-60 disabled:scale-100 disabled:shadow-none cursor-pointer"
+        className="mt-6 rounded-lg bg-gradient-to-r from-teal-600 to-teal-400 px-4 py-2 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_12px_rgba(45,212,191,0.3)] transition-all disabled:opacity-60 disabled:scale-100 disabled:shadow-none cursor-pointer"
       >
         {isPending ? "Saving..." : "Save Rank Labels"}
       </button>

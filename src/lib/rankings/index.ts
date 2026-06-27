@@ -9,10 +9,10 @@ export const rankLabels = {
 
 export const rankColors: Record<keyof typeof rankLabels, string> = {
   rank1: "bg-slate-100 text-slate-600",
-  "rank2": "bg-blue-100 text-blue-700",
-  rank3: "bg-purple-100 text-purple-700",
-  rank4: "bg-purple-200 text-purple-900",
-  rank5: "bg-brand-purple-neon/15 text-brand-purple-neon",
+  "rank2": "bg-cyan-100 text-cyan-700",
+  rank3: "bg-teal-100 text-teal-700",
+  rank4: "bg-teal-200 text-teal-900",
+  rank5: "bg-brand-teal/15 text-brand-teal",
 };
 
 export const achievementBadges = [

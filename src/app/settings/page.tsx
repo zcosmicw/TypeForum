@@ -25,7 +25,7 @@ export default async function SettingsPage() {
       <div className="mx-auto max-w-2xl space-y-6 px-4 py-10 sm:px-6">
         <ProfileSettingsForm profile={profile} />
 
-        <section className="neon-border rounded-xl glass-panel p-5">
+        <section className="panel-border rounded-xl surface-panel p-5">
           <h2 className="font-semibold text-white">Account</h2>
           <p className="mt-2 text-sm text-slate-500">
             Signed in as @{profile.username}
@@ -41,7 +41,7 @@ export default async function SettingsPage() {
           </div>
         </section>
 
-        <section className="neon-border rounded-xl glass-panel p-5">
+        <section className="panel-border rounded-xl surface-panel p-5">
           <h2 className="font-semibold text-white">Coming soon</h2>
           <ul className="mt-3 space-y-2 text-sm text-slate-500">
             <li>Privacy & DM permissions</li>

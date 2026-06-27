@@ -15,12 +15,12 @@ export default async function NotificationsPage() {
         <div className="mb-4 flex justify-end">
           <button
             type="button"
-            className="text-sm font-medium text-brand-blue hover:text-white"
+            className="text-sm font-medium text-brand-teal hover:text-white"
           >
             Mark all read
           </button>
         </div>
-        <div className="neon-border overflow-hidden rounded-xl glass-panel">
+        <div className="panel-border overflow-hidden rounded-xl surface-panel">
           {notifications.map((n) => (
             <div
               key={n.id}
@@ -40,7 +40,7 @@ export default async function NotificationsPage() {
                 <p className="mt-1 text-xs text-slate-400">{n.createdAt}</p>
               </div>
               {!n.read && (
-                <span className="h-2 w-2 shrink-0 rounded-full bg-brand-purple-neon" />
+                <span className="h-2 w-2 shrink-0 rounded-full bg-brand-teal" />
               )}
             </div>
           ))}

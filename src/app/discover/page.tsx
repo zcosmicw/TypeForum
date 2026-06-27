@@ -54,7 +54,7 @@ export default async function DiscoverPage({
               href={`/discover?tab=${t}`}
               className={`rounded-full px-4 py-1.5 text-sm font-semibold capitalize transition-all duration-200 ${
                 activeTab === t
-                  ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-[0_0_15px_rgba(168,85,247,0.35)]"
+                  ? "bg-gradient-to-r from-teal-500 to-cyan-400 text-white shadow-[0_0_12px_rgba(45,212,191,0.25)]"
                   : "bg-white/5 border border-white/5 text-slate-300 hover:bg-white/10 hover:text-white"
               }`}
             >
@@ -69,7 +69,7 @@ export default async function DiscoverPage({
           <h2 className="mb-4 text-lg font-bold capitalize text-white">
             {activeTab} threads
           </h2>
-          <div className="neon-border overflow-hidden rounded-xl glass-panel">
+          <div className="panel-border overflow-hidden rounded-xl surface-panel">
             {tabThreads[activeTab].map((thread) => (
               <ThreadRow key={thread.id} thread={thread} />
             ))}
@@ -89,13 +89,13 @@ export default async function DiscoverPage({
             {recommendedUsers.map((user) => (
               <div
                 key={user.username}
-                className="neon-border rounded-xl glass-panel p-4"
+                className="panel-border rounded-xl surface-panel p-4"
               >
                 <div className="flex items-start justify-between">
                   <div>
                     <Link
                       href={`/u/${user.username}`}
-                      className="font-semibold text-brand-blue hover:text-white"
+                      className="font-semibold text-brand-teal hover:text-white"
                     >
                       @{user.username}
                     </Link>

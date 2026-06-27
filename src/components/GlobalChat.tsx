@@ -196,7 +196,7 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
   };
 
   return (
-    <div className="neon-border overflow-hidden rounded-xl glass-panel">
+    <div className="panel-border overflow-hidden rounded-xl surface-panel">
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-3.5 bg-white/[0.02]">
         <div className="flex items-center gap-2">
           <span className="relative flex h-2.5 w-2.5">
@@ -266,12 +266,12 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
             onChange={(e) => setInput(e.target.value)}
             maxLength={500}
             disabled={isSending || !currentUserProfile}
-            className="flex-1 rounded-lg bg-white/5 border border-white/10 px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-purple-neon focus:ring-1 focus:ring-brand-purple-neon disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="flex-1 rounded-lg bg-white/5 border border-white/10 px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           />
           <button
             type="submit"
             disabled={isSending || !input.trim() || !currentUserProfile}
-            className="btn-premium-primary rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 min-w-[70px]"
+            className="btn-main rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 min-w-[70px]"
           >
             {isSending ? "..." : "Send"}
           </button>

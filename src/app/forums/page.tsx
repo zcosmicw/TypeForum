@@ -46,13 +46,13 @@ export default async function ForumsPage() {
             </h2>
             <Link 
               href="/discover" 
-              className="text-sm font-semibold text-brand-blue hover:text-white transition-colors"
+              className="text-sm font-semibold text-brand-teal hover:text-white transition-colors"
             >
               View all trending →
             </Link>
           </div>
           
-          <div className="neon-border overflow-hidden rounded-xl glass-panel">
+          <div className="panel-border overflow-hidden rounded-xl surface-panel">
             {trending.map((thread) => (
               <ThreadRow key={thread.id} thread={thread} />
             ))}

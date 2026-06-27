@@ -80,7 +80,7 @@ export function ProfileActions({
               className={`rounded-lg px-4 py-2 text-sm font-semibold transition-all disabled:opacity-60 ${
                 followed
                   ? "border border-white/10 bg-slate-800 text-slate-100 hover:bg-slate-700"
-                  : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)]"
+                  : "bg-gradient-to-r from-teal-600 to-teal-400 text-white hover:scale-[1.02] hover:shadow-[0_0_12px_rgba(45,212,191,0.3)]"
               }`}
             >
               {followed ? "Following ✓" : "Follow"}
@@ -99,13 +99,13 @@ export function ProfileActions({
 
         {/* Admin only rank assignment control */}
         {isAdmin && (
-          <div className="flex items-center gap-2 rounded-lg border border-brand-purple-neon/30 bg-purple-900/20 px-3 py-1.5">
-            <span className="text-xs font-semibold text-purple-300">Set Rank:</span>
+          <div className="flex items-center gap-2 rounded-lg border border-brand-teal/30 bg-teal-900/15 px-3 py-1.5">
+            <span className="text-xs font-semibold text-teal-300">Set Rank:</span>
             <select
               value={rank}
               onChange={(e) => handleRankChange(e.target.value as UserRank)}
               disabled={isPending}
-              className="rounded bg-slate-900 px-2 py-0.5 text-xs font-semibold text-purple-400 outline-none focus:ring-1 focus:ring-brand-purple-neon disabled:opacity-50"
+              className="rounded bg-slate-900 px-2 py-0.5 text-xs font-semibold text-teal-400 outline-none focus:ring-1 focus:ring-brand-teal disabled:opacity-50"
             >
               {TIERS.map((t) => (
                 <option key={t} value={t}>

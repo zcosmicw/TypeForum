@@ -26,7 +26,7 @@ export function QuoteReplyButton({
       type="button"
       onClick={handleQuote}
       title="Quote this post"
-      className="rounded px-2 py-1 text-xs text-slate-400 hover:bg-blue-50 hover:text-blue-600"
+      className="rounded px-2 py-1 text-xs text-slate-400 hover:bg-teal-900/20 hover:text-teal-400"
     >
       ↩ Quote
     </button>

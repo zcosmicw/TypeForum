@@ -7,10 +7,10 @@ type PageHeroProps = {
 
 export function PageHero({ eyebrow, title, description, children }: PageHeroProps) {
   return (
-    <section className="hero-gradient border-b border-white/10">
+    <section className="hero-bg border-b border-white/10">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
         {eyebrow && (
-          <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-brand-blue">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-brand-teal">
             {eyebrow}
           </p>
         )}

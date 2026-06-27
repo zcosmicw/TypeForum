@@ -93,7 +93,7 @@ export default async function AdminDashboardPage() {
         )}
 
         {/* User Management Table Card */}
-        <div className="neon-border overflow-hidden rounded-xl border border-white/10 glass-panel shadow-sm">
+        <div className="panel-border overflow-hidden rounded-xl border border-white/10 surface-panel shadow-sm">
           <div className="border-b border-white/5 bg-slate-900/40 px-6 py-4">
             <h2 className="text-sm font-bold text-slate-100">User Management</h2>
           </div>
@@ -114,13 +114,13 @@ export default async function AdminDashboardPage() {
                   <tr key={userItem.id} className="hover:bg-slate-800/40">
                     <td className="whitespace-nowrap px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-800 text-xs font-bold text-brand-blue">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-800 text-xs font-bold text-brand-teal">
                           {userItem.username.charAt(0)}
                         </span>
                         <div>
                           <Link
                             href={`/u/${userItem.username}`}
-                            className="font-semibold text-white hover:text-brand-blue"
+                            className="font-semibold text-white hover:text-brand-teal"
                           >
                             {userItem.displayName}
                           </Link>

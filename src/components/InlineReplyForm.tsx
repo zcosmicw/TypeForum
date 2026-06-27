@@ -49,7 +49,7 @@ export function InlineReplyForm({
         name="body"
         required
         placeholder="Reply to this comment..."
-        className="w-full rounded-xl border border-white/5 bg-gray-950/60 p-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 focus:shadow-[0_0_15px_rgba(168,85,247,0.15)] transition-all duration-200"
+        className="w-full rounded-xl border border-white/5 bg-gray-950/60 p-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500/40 focus:shadow-[0_0_15px_rgba(45,212,191,0.1)] transition-all duration-200"
         rows={3}
       />
 
@@ -61,14 +61,14 @@ export function InlineReplyForm({
         <button
           type="button"
           onClick={onClose}
-          className="btn-premium-secondary rounded-lg px-3.5 py-1.5 text-xs font-semibold"
+          className="btn-ghost rounded-lg px-3.5 py-1.5 text-xs font-semibold"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={pending}
-          className="btn-premium-primary rounded-lg px-4.5 py-1.5 text-xs font-semibold text-white transition-all disabled:opacity-60"
+          className="btn-main rounded-lg px-4.5 py-1.5 text-xs font-semibold text-white transition-all disabled:opacity-60"
         >
           {pending ? "Replying..." : "Post Reply"}
         </button>

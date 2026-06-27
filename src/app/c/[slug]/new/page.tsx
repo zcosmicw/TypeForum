@@ -24,11 +24,11 @@ export default async function NewThreadPage({
 
   return (
     <div className="flex-1">
-      <div className="border-b border-white/10 glass-panel">
+      <div className="border-b border-white/10 surface-panel">
         <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
           <Link
             href={`/c/${slug}${sub ? `?sub=${sub}` : ""}`}
-            className="mb-4 inline-block text-sm font-medium text-brand-blue hover:text-white"
+            className="mb-4 inline-block text-sm font-medium text-brand-teal hover:text-white"
           >
             ← Back to {category.name}
           </Link>

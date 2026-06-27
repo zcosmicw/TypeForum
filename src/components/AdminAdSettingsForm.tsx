@@ -95,7 +95,7 @@ export function AdminAdSettingsForm({ initialConfig }: AdminAdSettingsFormProps)
   };
 
   return (
-    <div className="neon-border rounded-xl border border-white/10 glass-panel p-5 mb-8">
+    <div className="panel-border rounded-xl border border-white/10 surface-panel p-5 mb-8">
       <h2 className="mb-4 font-semibold text-white">Ad Space Settings</h2>
       
       <div className="space-y-6">
@@ -111,7 +111,7 @@ export function AdminAdSettingsForm({ initialConfig }: AdminAdSettingsFormProps)
             type="button"
             onClick={() => setEnabled(!enabled)}
             className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-              enabled ? "bg-brand-purple-neon" : "bg-slate-700"
+              enabled ? "bg-brand-teal" : "bg-slate-700"
             }`}
           >
             <span
@@ -130,7 +130,7 @@ export function AdminAdSettingsForm({ initialConfig }: AdminAdSettingsFormProps)
           
           <div
             onClick={() => !uploading && fileInputRef.current?.click()}
-            className="relative h-28 w-full rounded-xl overflow-hidden border border-dashed border-white/20 bg-slate-950/40 hover:bg-slate-900/40 hover:border-brand-purple-neon/50 transition-all cursor-pointer flex flex-col items-center justify-center group"
+            className="relative h-28 w-full rounded-xl overflow-hidden border border-dashed border-white/20 bg-slate-950/40 hover:bg-slate-900/40 hover:border-brand-teal/50 transition-all cursor-pointer flex flex-col items-center justify-center group"
           >
             {imageUrl ? (
               <img src={imageUrl} alt="Ad Banner Preview" className="h-full w-full object-cover" />
@@ -190,7 +190,7 @@ export function AdminAdSettingsForm({ initialConfig }: AdminAdSettingsFormProps)
         type="button"
         disabled={isPending || uploading}
         onClick={handleSave}
-        className="mt-6 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)] transition-all disabled:opacity-60 disabled:scale-100 disabled:shadow-none cursor-pointer"
+        className="mt-6 rounded-lg bg-gradient-to-r from-teal-600 to-teal-400 px-4 py-2 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_12px_rgba(45,212,191,0.3)] transition-all disabled:opacity-60 disabled:scale-100 disabled:shadow-none cursor-pointer"
       >
         {isPending ? "Saving..." : "Save Settings"}
       </button>

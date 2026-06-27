@@ -80,7 +80,7 @@ export function AdminRowActions({
           value={rank}
           onChange={handleRankChange}
           disabled={isPending}
-          className="rounded-lg border border-white/10 bg-slate-900 px-2.5 py-1 text-xs font-semibold text-slate-300 outline-none transition-colors focus:border-brand-purple-neon disabled:opacity-50"
+          className="rounded-lg border border-white/10 bg-slate-900 px-2.5 py-1 text-xs font-semibold text-slate-300 outline-none transition-colors focus:border-brand-teal disabled:opacity-50"
         >
           <option value="rank1">Rank 1</option>
           <option value="rank2">Rank 2</option>
@@ -100,7 +100,7 @@ export function AdminRowActions({
           value={role}
           onChange={handleRoleChange}
           disabled={isPending || isSelf}
-          className="rounded-lg border border-white/10 bg-slate-900 px-2.5 py-1 text-xs font-semibold text-slate-300 outline-none transition-colors focus:border-brand-purple-neon disabled:opacity-50"
+          className="rounded-lg border border-white/10 bg-slate-900 px-2.5 py-1 text-xs font-semibold text-slate-300 outline-none transition-colors focus:border-brand-teal disabled:opacity-50"
         >
           <option value="user">User</option>
           <option value="moderator">Moderator</option>

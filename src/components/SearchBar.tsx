@@ -8,7 +8,7 @@ export function SearchBar({ defaultValue = "" }: { defaultValue?: string }) {
         name="q"
         defaultValue={defaultValue}
         placeholder="Search threads, users, products..."
-        className="w-full rounded-lg border border-white/10 bg-slate-900 py-2 pl-10 pr-4 text-sm text-slate-100 placeholder:text-slate-500 focus:border-brand-purple-neon focus:outline-none focus:ring-1 focus:ring-brand-purple-neon"
+        className="w-full rounded-lg border border-white/10 bg-slate-900 py-2 pl-10 pr-4 text-sm text-slate-100 placeholder:text-slate-500 focus:border-brand-teal focus:outline-none focus:ring-1 focus:ring-brand-teal"
       />
       <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
         ⌕

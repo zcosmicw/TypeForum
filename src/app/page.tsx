@@ -36,7 +36,7 @@ export default async function Home() {
       if (part.startsWith("[") && part.endsWith("]")) {
         const cleanText = part.slice(1, -1);
         return (
-          <span key={idx} className="neon-purple">
+          <span key={idx} className="accent-glow">
             {cleanText}
           </span>
         );
@@ -47,9 +47,9 @@ export default async function Home() {
 
   return (
     <div className="flex-1">
-      <section className="hero-gradient border-b border-white/10">
+      <section className="hero-bg border-b border-white/10">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-teal">
             {heroEyebrow}
           </p>
           <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
@@ -61,13 +61,13 @@ export default async function Home() {
           <div className="mt-8 flex flex-wrap gap-3.5">
             <Link
               href="/forums"
-              className="btn-premium-primary rounded-lg px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all"
+              className="btn-main rounded-lg px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all"
             >
               Browse forums
             </Link>
             <Link
               href="/signup"
-              className="btn-premium-secondary rounded-lg px-6 py-3 text-sm font-semibold text-slate-100 transition-all"
+              className="btn-ghost rounded-lg px-6 py-3 text-sm font-semibold text-slate-100 transition-all"
             >
               Join {siteName}
             </Link>
@@ -91,7 +91,7 @@ export default async function Home() {
               {categoriesDescription}
             </p>
           </div>
-          <Link href="/forums" className="text-sm font-medium text-brand-blue hover:text-white">
+          <Link href="/forums" className="text-sm font-medium text-brand-teal hover:text-white">
             View all →
           </Link>
         </div>
@@ -105,11 +105,11 @@ export default async function Home() {
       <section className="mx-auto max-w-6xl px-4 pb-8 sm:px-6">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xl font-bold text-white">Trending</h2>
-          <Link href="/discover" className="text-sm font-medium text-brand-blue hover:text-white">
+          <Link href="/discover" className="text-sm font-medium text-brand-teal hover:text-white">
             Discover →
           </Link>
         </div>
-        <div className="neon-border overflow-hidden rounded-xl glass-panel">
+        <div className="panel-border overflow-hidden rounded-xl surface-panel">
           {trending.slice(0, 4).map((thread) => (
             <ThreadRow key={thread.id} thread={thread} />
           ))}
@@ -123,14 +123,14 @@ export default async function Home() {
 
       <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
         <h2 className="mb-4 text-xl font-bold text-white">Recent threads</h2>
-        <div className="neon-border overflow-hidden rounded-xl glass-panel">
+        <div className="panel-border overflow-hidden rounded-xl surface-panel">
           {recentThreads.map((thread) => (
             <ThreadRow key={thread.id} thread={thread} />
           ))}
           {recentThreads.length === 0 && (
             <div className="px-6 py-10 text-center text-sm text-slate-400">
               No threads yet.{" "}
-              <Link href="/signup" className="font-medium text-brand-blue hover:text-white">
+              <Link href="/signup" className="font-medium text-brand-teal hover:text-white">
                 Sign up
               </Link>{" "}
               and start the conversation.

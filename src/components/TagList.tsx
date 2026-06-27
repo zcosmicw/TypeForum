@@ -2,10 +2,10 @@ import type { ThreadTag } from "@/lib/types";
 
 const tagStyles: Record<ThreadTag, string> = {
   beginner: "bg-green-900/20 text-green-400",
-  protocol: "bg-slate-800 text-blue-400",
-  transformation: "bg-purple-900/20 text-brand-purple-soft",
+  protocol: "bg-slate-800 text-teal-400",
+  transformation: "bg-teal-900/15 text-brand-amber-soft",
   debate: "bg-orange-900/20 text-orange-400",
-  pinned: "bg-brand-purple-neon/10 text-brand-purple-neon",
+  pinned: "bg-brand-teal/10 text-brand-teal",
   sponsored: "bg-amber-900/20 text-amber-400",
 };
 

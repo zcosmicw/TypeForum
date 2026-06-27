@@ -70,7 +70,7 @@ export function ProfileSettingsForm({ profile }: { profile: DbProfile }) {
   return (
     <form
       action={formAction}
-      className="neon-border rounded-xl border border-white/10 glass-panel p-5"
+      className="panel-border rounded-xl border border-white/10 surface-panel p-5"
     >
       <h2 className="mb-4 font-semibold text-white">Profile Settings</h2>
       
@@ -84,7 +84,7 @@ export function ProfileSettingsForm({ profile }: { profile: DbProfile }) {
           <label className="mb-2 block text-sm font-medium text-slate-300">Profile Banner</label>
           <div 
             onClick={() => !uploadingBanner && bannerInputRef.current?.click()}
-            className="relative h-36 w-full rounded-xl overflow-hidden border border-dashed border-white/20 bg-slate-950/40 hover:bg-slate-900/40 hover:border-brand-purple-neon/50 transition-all cursor-pointer flex items-center justify-center group"
+            className="relative h-36 w-full rounded-xl overflow-hidden border border-dashed border-white/20 bg-slate-950/40 hover:bg-slate-900/40 hover:border-brand-teal/50 transition-all cursor-pointer flex items-center justify-center group"
           >
             {bannerUrl ? (
               <img src={bannerUrl} alt="Banner Preview" className="h-full w-full object-cover" />
@@ -119,7 +119,7 @@ export function ProfileSettingsForm({ profile }: { profile: DbProfile }) {
             <label className="mb-2 block text-sm font-medium text-slate-300">Profile Picture</label>
             <div 
               onClick={() => !uploadingAvatar && avatarInputRef.current?.click()}
-              className="relative h-20 w-20 rounded-2xl overflow-hidden border border-dashed border-white/20 bg-slate-950/40 hover:bg-slate-900/40 hover:border-brand-purple-neon/50 transition-all cursor-pointer flex items-center justify-center group shrink-0"
+              className="relative h-20 w-20 rounded-2xl overflow-hidden border border-dashed border-white/20 bg-slate-950/40 hover:bg-slate-900/40 hover:border-brand-teal/50 transition-all cursor-pointer flex items-center justify-center group shrink-0"
             >
               {avatarUrl ? (
                 <img src={avatarUrl} alt="Avatar Preview" className="h-full w-full object-cover" />
@@ -175,7 +175,7 @@ export function ProfileSettingsForm({ profile }: { profile: DbProfile }) {
             name="displayName"
             defaultValue={profile.display_name}
             required
-            className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-purple-neon focus:outline-none focus:ring-2 focus:ring-brand-purple-neon/50"
+            className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/50"
           />
         </div>
 
@@ -189,7 +189,7 @@ export function ProfileSettingsForm({ profile }: { profile: DbProfile }) {
             name="bio"
             defaultValue={profile.bio}
             rows={4}
-            className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-purple-neon focus:outline-none focus:ring-2 focus:ring-brand-purple-neon/50"
+            className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/50"
           />
         </div>
       </div>
@@ -199,7 +199,7 @@ export function ProfileSettingsForm({ profile }: { profile: DbProfile }) {
       <button
         type="submit"
         disabled={pending || uploadingAvatar || uploadingBanner}
-        className="mt-5 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)] transition-all disabled:opacity-60 disabled:scale-100 disabled:shadow-none cursor-pointer"
+        className="mt-5 rounded-lg bg-gradient-to-r from-teal-600 to-teal-400 px-4 py-2 text-sm font-semibold text-white hover:scale-[1.02] hover:shadow-[0_0_12px_rgba(45,212,191,0.3)] transition-all disabled:opacity-60 disabled:scale-100 disabled:shadow-none cursor-pointer"
       >
         {pending ? "Saving…" : "Save profile"}
       </button>

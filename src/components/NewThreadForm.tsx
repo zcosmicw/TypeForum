@@ -27,11 +27,11 @@ export function NewThreadForm({
 
   if (!isLoggedIn) {
     return (
-      <div className="rounded-xl border border-dashed border-white/10 glass-panel px-6 py-8 text-center">
+      <div className="rounded-xl border border-dashed border-white/10 surface-panel px-6 py-8 text-center">
         <p className="text-slate-300">Log in to start a thread.</p>
         <Link
           href="/login"
-          className="mt-3 inline-block rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white transition-transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)]"
+          className="mt-3 inline-block rounded-lg bg-gradient-to-r from-teal-600 to-teal-400 px-4 py-2 text-sm font-semibold text-white transition-transform hover:scale-[1.02] hover:shadow-[0_0_12px_rgba(45,212,191,0.3)]"
         >
           Log in
         </Link>
@@ -40,7 +40,7 @@ export function NewThreadForm({
   }
 
   return (
-    <div className="neon-border rounded-xl glass-panel p-6">
+    <div className="panel-border rounded-xl surface-panel p-6">
       <h2 className="text-lg font-bold text-white">New thread in {category.name}</h2>
 
       <form action={createAction} className="mt-4 space-y-4">
@@ -59,7 +59,7 @@ export function NewThreadForm({
             required
             minLength={3}
             maxLength={200}
-            className="w-full rounded-lg border border-white/10 bg-slate-900 px-3 py-2 text-sm text-slate-100 focus:border-brand-purple-neon focus:outline-none focus:ring-1 focus:ring-brand-purple-neon"
+            className="w-full rounded-lg border border-white/10 bg-slate-900 px-3 py-2 text-sm text-slate-100 focus:border-brand-teal focus:outline-none focus:ring-1 focus:ring-brand-teal"
           />
         </div>
 
@@ -73,7 +73,7 @@ export function NewThreadForm({
             required
             minLength={10}
             rows={8}
-            className="w-full rounded-lg border border-white/10 bg-slate-900 px-3 py-2 text-sm text-slate-100 focus:border-brand-purple-neon focus:outline-none focus:ring-1 focus:ring-brand-purple-neon"
+            className="w-full rounded-lg border border-white/10 bg-slate-900 px-3 py-2 text-sm text-slate-100 focus:border-brand-teal focus:outline-none focus:ring-1 focus:ring-brand-teal"
           />
         </div>
 
@@ -85,7 +85,7 @@ export function NewThreadForm({
             id="tags"
             name="tags"
             placeholder="beginner, protocol"
-            className="w-full rounded-lg border border-white/10 bg-slate-900 px-3 py-2 text-sm text-slate-100 focus:border-brand-purple-neon focus:outline-none focus:ring-1 focus:ring-brand-purple-neon"
+            className="w-full rounded-lg border border-white/10 bg-slate-900 px-3 py-2 text-sm text-slate-100 focus:border-brand-teal focus:outline-none focus:ring-1 focus:ring-brand-teal"
           />
         </div>
 
@@ -97,7 +97,7 @@ export function NewThreadForm({
           <button
             type="submit"
             disabled={createPending || draftPending}
-            className="rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-5 py-2 text-sm font-semibold text-white transition-transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(191,0,255,0.4)] disabled:opacity-60"
+            className="rounded-lg bg-gradient-to-r from-teal-600 to-teal-400 px-5 py-2 text-sm font-semibold text-white transition-transform hover:scale-[1.02] hover:shadow-[0_0_12px_rgba(45,212,191,0.3)] disabled:opacity-60"
           >
             {createPending ? "Publishing…" : "Publish thread"}
           </button>

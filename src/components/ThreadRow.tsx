@@ -11,7 +11,7 @@ export function ThreadRow({ thread }: { thread: Thread }) {
       <Link href={`/t/${thread.id}`} className="min-w-0 flex-1">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           {thread.pinned && (
-            <span className="rounded-full bg-purple-500/10 border border-purple-500/20 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-purple-400">
+            <span className="rounded-full bg-teal-500/10 border border-teal-500/15 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-teal-400">
               Pinned
             </span>
           )}
@@ -33,7 +33,7 @@ export function ThreadRow({ thread }: { thread: Thread }) {
         <p className="mt-1.5 truncate text-sm text-slate-400 leading-relaxed">{thread.excerpt}</p>
         <p className="mt-2 text-xs text-slate-500">
           by{" "}
-          <span className="font-semibold text-brand-blue hover:underline">@{thread.author}</span>
+          <span className="font-semibold text-brand-teal hover:underline">@{thread.author}</span>
           {thread.subforumSlug && (
             <>
               {" "}
@@ -54,7 +54,7 @@ export function ThreadRow({ thread }: { thread: Thread }) {
           </span>{" "}
           views
         </span>
-        <span className="text-brand-purple-soft font-medium">{thread.lastActive}</span>
+        <span className="text-brand-amber-soft font-medium">{thread.lastActive}</span>
       </div>
     </div>
   );

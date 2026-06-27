@@ -92,8 +92,8 @@ export function VoteControl({
         onClick={() => handleVote(1)}
         className={`group rounded-full p-1 transition-all duration-200 ${
           optimisticState.userVote === 1
-            ? "text-blue-400 bg-blue-600/15"
-            : "text-slate-400 hover:bg-blue-600/15 hover:text-blue-400"
+            ? "text-teal-400 bg-teal-600/15"
+            : "text-slate-400 hover:bg-teal-600/15 hover:text-teal-400"
         } disabled:cursor-default`}
       >
         <svg
@@ -109,7 +109,7 @@ export function VoteControl({
       <span
         className={`min-w-[2.5ch] text-center font-bold tracking-tight ${
           optimisticState.score > 0
-            ? "text-blue-400"
+            ? "text-teal-400"
             : optimisticState.score < 0
             ? "text-red-400"
             : "text-slate-400"

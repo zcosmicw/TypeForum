@@ -34,8 +34,8 @@ export default async function SearchPage({
             href={`/search${q ? `?q=${encodeURIComponent(q)}` : ""}`}
             className={`rounded-full px-3 py-1 text-xs font-medium ${
               !tag
-                ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                : "bg-slate-800 text-blue-400 hover:bg-slate-700"
+                ? "bg-gradient-to-r from-teal-600 to-teal-400 text-white"
+                : "bg-slate-800 text-teal-400 hover:bg-slate-700"
             }`}
           >
             All tags
@@ -46,8 +46,8 @@ export default async function SearchPage({
               href={`/search?q=${encodeURIComponent(q)}&tag=${t}`}
               className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${
                 tag === t
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                  : "bg-slate-800 text-blue-400 hover:bg-slate-700"
+                  ? "bg-gradient-to-r from-teal-600 to-teal-400 text-white"
+                  : "bg-slate-800 text-teal-400 hover:bg-slate-700"
               }`}
             >
               {t}
@@ -61,7 +61,7 @@ export default async function SearchPage({
           {tag && ` tagged ${tag}`}
         </p>
 
-        <div className="neon-border overflow-hidden rounded-xl glass-panel">
+        <div className="panel-border overflow-hidden rounded-xl surface-panel">
           {results.length > 0 ? (
             results.map((thread) => <ThreadRow key={thread.id} thread={thread} />)
           ) : (

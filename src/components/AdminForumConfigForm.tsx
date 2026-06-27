@@ -72,7 +72,7 @@ export function AdminForumConfigForm({ categories: initialCategories, subforums:
   };
 
   return (
-    <div className="neon-border rounded-xl border border-white/10 glass-panel p-5 mb-8">
+    <div className="panel-border rounded-xl border border-white/10 surface-panel p-5 mb-8">
       <h2 className="mb-4 font-semibold text-white">Forums Layout Editor</h2>
       <p className="text-xs text-slate-500 mb-6">
         Edit the names and slugs of categories and subforums. Changing slugs will update URL routes instantly.
@@ -97,26 +97,26 @@ export function AdminForumConfigForm({ categories: initialCategories, subforums:
               {/* Category Info Form row */}
               <div className="flex flex-col gap-3 md:flex-row md:items-end">
                 <div className="flex-1 min-w-[200px]">
-                  <label className="text-xs font-bold text-brand-purple-soft uppercase tracking-wider block mb-1">
+                  <label className="text-xs font-bold text-brand-amber-soft uppercase tracking-wider block mb-1">
                     Category Name
                   </label>
                   <input
                     type="text"
                     value={category.name}
                     onChange={(e) => handleCategoryFieldChange(category.id, "name", e.target.value)}
-                    className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-1.5 text-xs focus:border-brand-purple-neon focus:outline-none focus:ring-1 focus:ring-brand-purple-neon"
+                    className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-1.5 text-xs focus:border-brand-teal focus:outline-none focus:ring-1 focus:ring-brand-teal"
                   />
                 </div>
 
                 <div className="flex-1 min-w-[150px]">
-                  <label className="text-xs font-bold text-brand-purple-soft uppercase tracking-wider block mb-1">
+                  <label className="text-xs font-bold text-brand-amber-soft uppercase tracking-wider block mb-1">
                     Slug
                   </label>
                   <input
                     type="text"
                     value={category.slug}
                     onChange={(e) => handleCategoryFieldChange(category.id, "slug", e.target.value)}
-                    className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-1.5 text-xs focus:border-brand-purple-neon focus:outline-none focus:ring-1 focus:ring-brand-purple-neon"
+                    className="w-full rounded-lg border border-white/10 bg-slate-900 text-slate-100 px-3 py-1.5 text-xs focus:border-brand-teal focus:outline-none focus:ring-1 focus:ring-brand-teal"
                   />
                 </div>
 
@@ -145,7 +145,7 @@ export function AdminForumConfigForm({ categories: initialCategories, subforums:
                           value={subforum.name}
                           onChange={(e) => handleSubforumFieldChange(subforum.id, "name", e.target.value)}
                           placeholder="Subforum Name"
-                          className="w-full rounded-lg border border-white/10 bg-slate-900/50 text-slate-300 px-3 py-1 text-xs focus:border-brand-purple-neon focus:outline-none"
+                          className="w-full rounded-lg border border-white/10 bg-slate-900/50 text-slate-300 px-3 py-1 text-xs focus:border-brand-teal focus:outline-none"
                         />
                       </div>
                       
@@ -155,7 +155,7 @@ export function AdminForumConfigForm({ categories: initialCategories, subforums:
                           value={subforum.slug}
                           onChange={(e) => handleSubforumFieldChange(subforum.id, "slug", e.target.value)}
                           placeholder="subforum-slug"
-                          className="w-full rounded-lg border border-white/10 bg-slate-900/50 text-slate-300 px-3 py-1 text-xs focus:border-brand-purple-neon focus:outline-none"
+                          className="w-full rounded-lg border border-white/10 bg-slate-900/50 text-slate-300 px-3 py-1 text-xs focus:border-brand-teal focus:outline-none"
                         />
                       </div>
 

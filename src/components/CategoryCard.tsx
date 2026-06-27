@@ -5,13 +5,13 @@ export function CategoryCard({ category }: { category: Category }) {
   return (
     <Link
       href={`/c/${category.slug}`}
-      className="premium-card group flex flex-col p-5"
+      className="card-elevated group flex flex-col p-5"
     >
       <div className="mb-4 flex items-start justify-between">
-        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-900 border border-white/5 text-lg text-brand-blue transition-colors group-hover:bg-purple-500/10 group-hover:text-brand-purple-soft">
+        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-900 border border-white/5 text-lg text-brand-teal transition-colors group-hover:bg-teal-500/10 group-hover:text-brand-amber-soft">
           {category.icon}
         </span>
-        <span className="rounded-full bg-blue-500/10 border border-blue-500/20 px-2.5 py-0.5 text-xs font-medium text-blue-400">
+        <span className="rounded-full bg-teal-500/10 border border-teal-500/15 px-2.5 py-0.5 text-xs font-medium text-teal-400">
           {category.threadCount} threads
         </span>
       </div>

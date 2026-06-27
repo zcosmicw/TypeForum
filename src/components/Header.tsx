@@ -31,11 +31,11 @@ export async function Header() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between gap-4">
           <Link href="/" className="group flex shrink-0 items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-sm font-bold text-white shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_22px_rgba(168,85,247,0.5)]">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500 to-cyan-400 text-sm font-bold text-white shadow-[0_0_15px_rgba(45,212,191,0.25)] transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_20px_rgba(45,212,191,0.35)]">
               {logoInitials}
             </span>
             <div>
-              <span className="text-lg font-bold tracking-tight text-white transition-colors group-hover:text-purple-300">
+              <span className="text-lg font-bold tracking-tight text-white transition-colors group-hover:text-teal-300">
                 {siteName}
               </span>
             </div>
@@ -67,7 +67,7 @@ export async function Header() {
                 >
                   🔔
                   {unreadNotifications > 0 && (
-                    <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-brand-purple-neon text-[10px] font-bold text-white animate-pulse">
+                    <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-brand-teal text-[10px] font-bold text-white animate-pulse">
                       {unreadNotifications}
                     </span>
                   )}
@@ -76,7 +76,7 @@ export async function Header() {
                 {(profile.role === "admin" || profile.role === "moderator") && (
                   <Link
                     href="/admin"
-                    className="hidden rounded-lg px-3 py-2 text-sm font-semibold text-brand-purple-soft hover:bg-white/5 sm:block"
+                    className="hidden rounded-lg px-3 py-2 text-sm font-semibold text-brand-amber-soft hover:bg-white/5 sm:block"
                   >
                     🛡️ Admin
                   </Link>
@@ -99,7 +99,7 @@ export async function Header() {
                       className="h-5 w-5 rounded-full object-cover border border-white/10"
                     />
                   ) : (
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-[9px] font-bold text-white uppercase">
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-teal-600 to-teal-400 text-[9px] font-bold text-white uppercase">
                       {profile.display_name.charAt(0)}
                     </span>
                   )}
@@ -118,7 +118,7 @@ export async function Header() {
                 </Link>
                 <Link
                   href="/signup"
-                  className="btn-premium-primary rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-md transition-all sm:px-4.5"
+                  className="btn-main rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-md transition-all sm:px-4.5"
                 >
                   Join
                 </Link>

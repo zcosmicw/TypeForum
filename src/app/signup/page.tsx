@@ -16,7 +16,7 @@ export default function SignUpPage() {
           By signing up you agree to TypeForum community guidelines.
         </p>
         <p className="mt-2 text-center text-sm text-slate-500">
-          <Link href="/" className="text-brand-blue hover:text-white">
+          <Link href="/" className="text-brand-teal hover:text-white">
             ← Back home
           </Link>
         </p>

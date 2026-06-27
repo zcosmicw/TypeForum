@@ -38,7 +38,7 @@ export function CommentNode({
   // Custom margin classes based on depth
   const marginClasses = currentIndent === 0 
     ? "w-full" 
-    : "pl-3 sm:pl-5 border-l border-white/10 hover:border-purple-500/40 transition-colors mt-3.5";
+    : "pl-3 sm:pl-5 border-l border-white/10 hover:border-teal-500/30 transition-colors mt-3.5";
 
   // Check if current user is allowed to delete this specific comment
   const canDelete = isStaff || (currentUsername && currentUsername === post.author);
@@ -46,11 +46,11 @@ export function CommentNode({
   return (
     <div id={post.id} className={marginClasses} style={{ marginLeft: currentIndent > 0 ? "min(12px, 3vw)" : "0px" }}>
       {/* Comment Card */}
-      <article className={`premium-card p-4 sm:p-5 ${isOP ? "ring-1 ring-blue-500/30 border-blue-500/20" : ""}`}>
+      <article className={`card-elevated p-4 sm:p-5 ${isOP ? "ring-1 ring-teal-500/25 border-teal-500/15" : ""}`}>
         {/* Card Header */}
         <div className="mb-3.5 flex items-center justify-between border-b border-white/5 pb-3">
           <div className="flex items-center gap-3">
-            <span className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500/15 via-indigo-500/15 to-purple-500/15 border border-purple-500/20 text-xs sm:text-sm font-bold text-slate-100 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+            <span className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-to-br from-teal-500/15 to-cyan-500/15 border border-teal-500/15 text-xs sm:text-sm font-bold text-slate-100 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
               {post.author.charAt(0).toUpperCase()}
             </span>
             <div>
@@ -70,7 +70,7 @@ export function CommentNode({
           </div>
           <div className="flex items-center gap-2">
             {isOP && (
-              <span className="rounded-full bg-blue-500/10 border border-blue-500/20 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-blue-400">
+              <span className="rounded-full bg-teal-500/10 border border-teal-500/15 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-teal-400">
                 OP
               </span>
             )}
@@ -87,7 +87,7 @@ export function CommentNode({
 
         {/* Card Body */}
         {post.quote && !isOP && (
-          <blockquote className="mb-4 border-l-2 border-purple-500/50 bg-purple-950/15 rounded-r-lg px-3.5 py-2.5 text-xs sm:text-sm italic text-slate-400">
+          <blockquote className="mb-4 border-l-2 border-teal-500/40 bg-teal-950/15 rounded-r-lg px-3.5 py-2.5 text-xs sm:text-sm italic text-slate-400">
             {post.quote}
           </blockquote>
         )}
