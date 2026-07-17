@@ -3,7 +3,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ThreadRow } from "@/components/ThreadRow";
 import { GlobalChat } from "@/components/GlobalChat";
-import ChromaticFluid from "@/components/ui/chromatic-fluid";
+import Warp, { warpPresets } from "@/components/ui/warp";
 import { getSessionProfile } from "@/lib/actions/auth";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -46,8 +46,19 @@ export default async function Home() {
 
   return (
     <>
-      <ChromaticFluid height="auto" className="border-b border-border-subtle bg-bg-surface py-20 sm:py-28">
-        <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+      <section className="relative border-b border-border-subtle bg-bg-surface overflow-hidden py-20 sm:py-28">
+        <Warp
+          {...(warpPresets[0].params as any)}
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            pointerEvents: "none",
+            opacity: 0.35,
+          }}
+        />
+        <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
           <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-text-primary sm:text-5xl sm:leading-[1.15]">
             {renderHeroTitle(heroTitle)}
           </h1>
@@ -63,7 +74,7 @@ export default async function Home() {
             </Link>
           </div>
         </div>
-      </ChromaticFluid>
+      </section>
 
       <div className="mx-auto max-w-[1200px] px-5 py-10 sm:px-8">
         <AdSlot variant="banner" />
