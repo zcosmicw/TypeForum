@@ -6,15 +6,10 @@ export default async function AdminForumsPage() {
 
   return (
     <div className="max-w-4xl">
-      <div className="accent-bar border-volt mb-6">
-        <h1 className="text-2xl font-black uppercase tracking-tighter text-cream">
-          Forum Configuration
-        </h1>
-      </div>
-      <p className="mb-8 text-sm text-muted">
-        Define the core category and subforum structure via JSON configuration.
+      <h1 className="mb-2 text-xl font-semibold text-text-primary">Forum configuration</h1>
+      <p className="mb-8 text-sm text-text-muted">
+        Define the core category and subforum structure via JSON.
       </p>
-
       <AdminForumConfigForm config={config} />
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { rankColors, rankLabels as defaultRankLabels } from "@/lib/rankings";
+import { rankLabels as defaultRankLabels } from "@/lib/rankings";
 import type { UserRank } from "@/lib/types";
 
 let globalRankLabelsCache: Record<string, string> | null = null;

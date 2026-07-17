@@ -14,8 +14,13 @@ export {
   fetchUnreadNotificationCount,
   fetchUnreadMessageCount,
   fetchMessages,
+  fetchAllUsers,
+  getSiteSettings,
+  getForumConfig,
+  getAdConfig,
+  getRanksConfig,
+  markAllNotificationsRead,
 
-  // Aliases for backward compatibility
   fetchUnreadNotificationCount as getUnreadNotificationCount,
   fetchUnreadMessageCount as getUnreadMessageCount,
 } from "@/lib/forum/queries";

@@ -665,3 +665,79 @@ export async function fetchUnreadMessageCount(): Promise<number> {
 
   return count ?? 0;
 }
+
+export async function fetchAllUsers() {
+  const supabase = await createClient();
+  if (!supabase) return [];
+
+  const { data } = await supabase
+    .from("profiles")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  return (data ?? []) as import("@/lib/supabase/types").DbProfile[];
+}
+
+export async function getSiteSettings() {
+  const supabase = await createClient();
+  if (!supabase) return null;
+
+  const { data } = await supabase
+    .from("site_settings")
+    .select("*")
+    .eq("id", 1)
+    .maybeSingle();
+
+  return data;
+}
+
+export async function getForumConfig() {
+  const supabase = await createClient();
+  if (!supabase) return null;
+
+  const { data: categories } = await supabase
+    .from("categories")
+    .select("*")
+    .order("sort_order");
+
+  return { categories: categories ?? [] };
+}
+
+export async function getAdConfig() {
+  const supabase = await createClient();
+  if (!supabase) return null;
+
+  const { data } = await supabase
+    .from("ad_config")
+    .select("*")
+    .eq("id", 1)
+    .maybeSingle();
+
+  return data;
+}
+
+export async function getRanksConfig() {
+  const supabase = await createClient();
+  if (!supabase) return [];
+
+  const { data } = await supabase
+    .from("rank_config")
+    .select("*")
+    .order("rank_key");
+
+  return data ?? [];
+}
+
+export async function markAllNotificationsRead() {
+  const supabase = await createClient();
+  if (!supabase) return;
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return;
+
+  await supabase
+    .from("notifications")
+    .update({ read: true })
+    .eq("user_id", user.id)
+    .eq("read", false);
+}

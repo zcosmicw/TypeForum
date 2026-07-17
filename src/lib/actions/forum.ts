@@ -386,3 +386,124 @@ export async function voteThread(formData: FormData) {
   revalidatePath(`/t/${threadId}`);
   return {};
 }
+
+export async function followUser(formData: FormData) {
+  if (!isSupabaseConfigured()) return { error: getSupabaseEnvError() };
+  const profile = await getSessionProfile();
+  if (!profile) return { error: "Login required." };
+
+  const targetId = String(formData.get("targetId") ?? "");
+  if (!targetId) return { error: "Target user not specified." };
+
+  const supabase = await createClient();
+  if (!supabase) return { error: getSupabaseEnvError() };
+
+  const { error } = await supabase.from("follows").insert({
+    follower_id: profile.id,
+    following_id: targetId,
+  });
+
+  if (error) return { error: error.message };
+  revalidatePath("/");
+  return { success: true };
+}
+
+export async function unfollowUser(formData: FormData) {
+  if (!isSupabaseConfigured()) return { error: getSupabaseEnvError() };
+  const profile = await getSessionProfile();
+  if (!profile) return { error: "Login required." };
+
+  const targetId = String(formData.get("targetId") ?? "");
+  if (!targetId) return { error: "Target user not specified." };
+
+  const supabase = await createClient();
+  if (!supabase) return { error: getSupabaseEnvError() };
+
+  const { error } = await supabase
+    .from("follows")
+    .delete()
+    .eq("follower_id", profile.id)
+    .eq("following_id", targetId);
+
+  if (error) return { error: error.message };
+  revalidatePath("/");
+  return { success: true };
+}
+
+export async function deleteThread(formData: FormData) {
+  if (!isSupabaseConfigured()) return { error: getSupabaseEnvError() };
+  const profile = await getSessionProfile();
+  if (!profile) return { error: "Login required." };
+
+  const threadId = String(formData.get("threadId") ?? "");
+  if (!threadId) return { error: "Thread not specified." };
+
+  const supabase = await createClient();
+  if (!supabase) return { error: getSupabaseEnvError() };
+
+  const { data: thread } = await supabase.from("threads").select("author_id").eq("id", threadId).single();
+  if (!thread) return { error: "Thread not found." };
+
+  const isAuthor = thread.author_id === profile.id;
+  const isStaff = profile.role === "admin" || profile.role === "moderator";
+  if (!isAuthor && !isStaff) return { error: "Unauthorized." };
+
+  const { error } = await supabase.from("threads").delete().eq("id", threadId);
+  if (error) return { error: error.message };
+
+  revalidatePath("/forums");
+  return { success: true };
+}
+
+export async function deletePost(formData: FormData) {
+  if (!isSupabaseConfigured()) return { error: getSupabaseEnvError() };
+  const profile = await getSessionProfile();
+  if (!profile) return { error: "Login required." };
+
+  const postId = String(formData.get("postId") ?? "");
+  const threadId = String(formData.get("threadId") ?? "");
+  if (!postId) return { error: "Post not specified." };
+
+  const supabase = await createClient();
+  if (!supabase) return { error: getSupabaseEnvError() };
+
+  const { data: post } = await supabase.from("posts").select("author_id").eq("id", postId).single();
+  if (!post) return { error: "Post not found." };
+
+  const isAuthor = post.author_id === profile.id;
+  const isStaff = profile.role === "admin" || profile.role === "moderator";
+  if (!isAuthor && !isStaff) return { error: "Unauthorized." };
+
+  const { error } = await supabase.from("posts").delete().eq("id", postId);
+  if (error) return { error: error.message };
+
+  if (threadId) revalidatePath(`/t/${threadId}`);
+  return { success: true };
+}
+
+export async function createDirectMessage(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  if (!isSupabaseConfigured()) return { error: getSupabaseEnvError() };
+  const profile = await getSessionProfile();
+  if (!profile) return { error: "Login required." };
+
+  const recipient = String(formData.get("recipient") ?? "").trim();
+  const body = String(formData.get("body") ?? "").trim();
+
+  if (!recipient || !body) return { error: "Recipient and message are required." };
+
+  const supabase = await createClient();
+  if (!supabase) return { error: getSupabaseEnvError() };
+
+  const { error } = await supabase.from("messages").insert({
+    from_username: profile.username,
+    to_username: recipient,
+    body,
+  });
+
+  if (error) return { error: error.message };
+  revalidatePath("/messages");
+  return { success: true };
+}

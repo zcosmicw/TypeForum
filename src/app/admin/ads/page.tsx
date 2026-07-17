@@ -6,15 +6,10 @@ export default async function AdminAdsPage() {
 
   return (
     <div className="max-w-3xl">
-      <div className="accent-bar border-coral mb-6">
-        <h1 className="text-2xl font-black uppercase tracking-tighter text-cream">
-          Ad Management
-        </h1>
-      </div>
-      <p className="mb-8 text-sm text-muted">
+      <h1 className="mb-2 text-xl font-semibold text-text-primary">Ad management</h1>
+      <p className="mb-8 text-sm text-text-muted">
         Configure the global banner advertisement placement.
       </p>
-      
       <AdminAdSettingsForm config={config} />
     </div>
   );

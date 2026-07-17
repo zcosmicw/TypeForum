@@ -310,3 +310,120 @@ export async function updateSiteSettingsAction(settings: {
   revalidatePath("/admin");
   return { success: true };
 }
+
+export type ActionState = {
+  error?: string;
+  success?: boolean;
+};
+
+export async function updateSiteSettings(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    await updateSiteSettingsAction({
+      site_name: String(formData.get("siteName") ?? ""),
+      hero_eyebrow: String(formData.get("heroEyebrow") ?? ""),
+      hero_title: String(formData.get("heroTitle") ?? ""),
+      hero_description: String(formData.get("heroDescription") ?? ""),
+      categories_description: String(formData.get("categoriesDescription") ?? ""),
+      footer_main: String(formData.get("footerMain") ?? ""),
+      footer_sub: String(formData.get("footerSub") ?? ""),
+    });
+    return { success: true };
+  } catch (err: any) {
+    return { error: err.message || "Failed to save settings." };
+  }
+}
+
+export async function updateForumConfig(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    const categoriesJson = String(formData.get("categoriesJson") ?? "[]");
+    const categories = JSON.parse(categoriesJson);
+
+    const admin = await getAuthenticatedAdmin();
+    if (!admin) return { error: "Unauthorized" };
+
+    const supabase = await createClient();
+    if (!supabase) return { error: "Database not connected" };
+
+    for (const cat of categories) {
+      if (cat.id) {
+        await supabase.from("categories").update({
+          name: cat.name,
+          slug: cat.slug,
+          description: cat.description || "",
+          icon: cat.icon || "📁",
+        }).eq("id", cat.id);
+      }
+    }
+
+    revalidatePath("/");
+    revalidatePath("/forums");
+    revalidatePath("/admin");
+    return { success: true };
+  } catch (err: any) {
+    return { error: err.message || "Failed to save forum config." };
+  }
+}
+
+export async function updateAdSettings(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    const enabled = formData.get("enabled") === "on";
+    const imageUrl = String(formData.get("imageUrl") ?? "") || null;
+    await updateAdConfigAction(enabled, imageUrl);
+    return { success: true };
+  } catch (err: any) {
+    return { error: err.message || "Failed to save ad settings." };
+  }
+}
+
+export async function updateRanksConfig(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    const labels: Record<string, string> = {};
+    const rankKeys = ["admin", "moderator", "veteran", "member", "newbie"];
+    for (const key of rankKeys) {
+      const val = formData.get(`rank_${key}`);
+      if (val) labels[key] = String(val);
+    }
+    await updateRankLabelsAction(labels);
+    return { success: true };
+  } catch (err: any) {
+    return { error: err.message || "Failed to save rank labels." };
+  }
+}
+
+export async function updateUserRole(targetId: string, role: string) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) throw new Error("Unauthorized");
+
+  const supabase = await createClient();
+  if (!supabase) throw new Error("Database not connected");
+
+  const { error } = await supabase.from("profiles").update({ role }).eq("id", targetId);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/users");
+}
+
+export async function deleteUserAction(targetId: string) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) throw new Error("Unauthorized");
+
+  const supabase = await createClient();
+  if (!supabase) throw new Error("Database not connected");
+
+  const { error } = await supabase.from("profiles").delete().eq("id", targetId);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/users");
+}

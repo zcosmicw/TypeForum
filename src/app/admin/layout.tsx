@@ -23,17 +23,17 @@ export default async function AdminLayout({
   ];
 
   return (
-    <div className="flex-1 border-t-2 border-border">
-      <div className="mx-auto flex max-w-6xl flex-col lg:flex-row">
-        <aside className="w-full shrink-0 border-b-2 border-border lg:w-64 lg:border-b-0 lg:border-r-2">
+    <div className="border-t border-border-subtle">
+      <div className="mx-auto flex max-w-[1200px] flex-col lg:flex-row">
+        <aside className="w-full shrink-0 border-b border-border-subtle lg:w-56 lg:border-b-0 lg:border-r lg:border-border-subtle">
           <div className="p-6">
-            <h2 className="text-xl font-black uppercase tracking-tighter text-cream mb-6">Admin Panel</h2>
-            <nav className="flex gap-2 overflow-x-auto lg:flex-col lg:overflow-visible">
+            <h2 className="text-base font-semibold text-text-primary mb-5">Admin panel</h2>
+            <nav className="flex gap-1.5 overflow-x-auto lg:flex-col lg:overflow-visible">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="shrink-0 border-2 border-border px-4 py-2 text-xs font-bold uppercase tracking-wider text-muted hover:border-volt hover:text-volt transition-colors bg-surface lg:w-full"
+                  className="shrink-0 rounded-md px-3 py-2 text-sm font-medium text-text-muted transition-colors hover:text-text-primary hover:bg-bg-hover lg:w-full"
                 >
                   {link.label}
                 </Link>
@@ -41,7 +41,6 @@ export default async function AdminLayout({
             </nav>
           </div>
         </aside>
-
         <main className="flex-1 p-6 lg:p-10">{children}</main>
       </div>
     </div>
