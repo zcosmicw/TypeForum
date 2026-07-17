@@ -7,7 +7,7 @@ import type { UserRank } from "@/lib/types";
 type ProfileActionsProps = {
   targetUserId: string;
   username: string;
-  currentRank: UserRank;
+  targetUserRole: string;
   currentUserRole: string | null;
   isLoggedIn: boolean;
   initialIsFollowing: boolean;
@@ -17,7 +17,7 @@ type ProfileActionsProps = {
 export function ProfileActions({
   targetUserId,
   username,
-  currentRank,
+  targetUserRole,
   currentUserRole,
   isLoggedIn,
   initialIsFollowing,
@@ -46,7 +46,7 @@ export function ProfileActions({
     });
   };
 
-  const showBanButton = !isOwnProfile && currentUserRole === "admin" && currentRank !== "admin";
+  const showBanButton = !isOwnProfile && currentUserRole === "admin" && targetUserRole !== "admin";
 
   return (
     <div className="flex flex-wrap items-center gap-3">

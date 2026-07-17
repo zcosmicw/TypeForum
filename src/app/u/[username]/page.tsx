@@ -90,7 +90,7 @@ export default async function ProfilePage({
             <ProfileActions
               targetUserId={user.id}
               username={user.username}
-              currentRank={user.userRank}
+              targetUserRole={user.role}
               currentUserRole={sessionProfile?.role ?? null}
               isLoggedIn={!!sessionUser}
               initialIsFollowing={isFollowing}

@@ -26,7 +26,7 @@ export default async function NotificationsPage() {
             >
               <div className="flex items-start gap-3">
                 <span className="mt-0.5 text-lg">
-                  {notif.type === "upvote" && "⭐"}
+                  {notif.type === "vote" && "⭐"}
                   {notif.type === "follow" && "👀"}
                   {notif.type === "reply" && "💬"}
                 </span>

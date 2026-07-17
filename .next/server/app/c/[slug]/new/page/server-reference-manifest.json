@@ -1,0 +1,89 @@
+{
+  "node": {
+    "004658741e511a176a17c91752ff44dcfe3933940c": {
+      "workers": {
+        "app/c/[slug]/new/page": {
+          "moduleId": 79838,
+          "async": false,
+          "exportedName": "signOut",
+          "filename": "src/lib/actions/auth.ts"
+        }
+      },
+      "exportedName": "signOut",
+      "filename": "src/lib/actions/auth.ts"
+    },
+    "000220282892f794de129aed73295ff07dc94f834e": {
+      "workers": {
+        "app/c/[slug]/new/page": {
+          "moduleId": 79838,
+          "async": false,
+          "exportedName": "getSessionUser",
+          "filename": "src/lib/actions/auth.ts"
+        }
+      },
+      "exportedName": "getSessionUser",
+      "filename": "src/lib/actions/auth.ts"
+    },
+    "003da50ac01ea9a1691cc0e7578435c4de85cdfe9e": {
+      "workers": {
+        "app/c/[slug]/new/page": {
+          "moduleId": 79838,
+          "async": false,
+          "exportedName": "getSessionProfile",
+          "filename": "src/lib/actions/auth.ts"
+        }
+      },
+      "exportedName": "getSessionProfile",
+      "filename": "src/lib/actions/auth.ts"
+    },
+    "609d58974c94464e0150706fa10cfaacc932e2522c": {
+      "workers": {
+        "app/c/[slug]/new/page": {
+          "moduleId": 79838,
+          "async": false,
+          "exportedName": "signUp",
+          "filename": "src/lib/actions/auth.ts"
+        }
+      },
+      "exportedName": "signUp",
+      "filename": "src/lib/actions/auth.ts"
+    },
+    "60da57892c356b0ecf23a7649c9127c53d07d9503d": {
+      "workers": {
+        "app/c/[slug]/new/page": {
+          "moduleId": 79838,
+          "async": false,
+          "exportedName": "signIn",
+          "filename": "src/lib/actions/auth.ts"
+        }
+      },
+      "exportedName": "signIn",
+      "filename": "src/lib/actions/auth.ts"
+    },
+    "608cf5f5899da50410b2b66b25a447e0b51c0bf2f7": {
+      "workers": {
+        "app/c/[slug]/new/page": {
+          "moduleId": 79838,
+          "async": false,
+          "exportedName": "createThread",
+          "filename": "src/lib/actions/forum.ts"
+        }
+      },
+      "exportedName": "createThread",
+      "filename": "src/lib/actions/forum.ts"
+    },
+    "60287504e415cd3a72784c43e3e054ce5f31a08cd1": {
+      "workers": {
+        "app/c/[slug]/new/page": {
+          "moduleId": 79838,
+          "async": false,
+          "exportedName": "saveDraft",
+          "filename": "src/lib/actions/forum.ts"
+        }
+      },
+      "exportedName": "saveDraft",
+      "filename": "src/lib/actions/forum.ts"
+    }
+  },
+  "edge": {}
+}
