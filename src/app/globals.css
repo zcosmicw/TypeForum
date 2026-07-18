@@ -60,11 +60,22 @@ body {
   min-height: 100vh;
   font-family: var(--font-body);
   color: var(--text-primary);
-  background: url('/background.png') no-repeat center center fixed;
-  background-size: cover;
+  background: #060416;
   overflow-x: hidden;
+  position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background: url('/background.png') no-repeat center center;
+  background-size: cover;
+  filter: blur(40px) brightness(0.4) saturate(0.85);
+  pointer-events: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
