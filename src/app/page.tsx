@@ -1,9 +1,9 @@
 import Link from "next/link";
+import dynamicImport from "next/dynamic";
 import { AdSlot } from "@/components/AdSlot";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ThreadRow } from "@/components/ThreadRow";
 import { GlobalChat } from "@/components/GlobalChat";
-import Warp, { warpPresets } from "@/components/ui/warp";
 import { getSessionProfile } from "@/lib/actions/auth";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -11,6 +11,11 @@ import {
   fetchRecentThreads,
   fetchTrendingThreads,
 } from "@/lib/data";
+
+const WarpHeroBackground = dynamicImport(
+  () => import("@/components/WarpHeroBackground"),
+  { ssr: false }
+);
 
 export const dynamic = "force-dynamic";
 
@@ -47,17 +52,7 @@ export default async function Home() {
   return (
     <>
       <section className="relative border-b border-border-subtle bg-bg-surface overflow-hidden py-20 sm:py-28">
-        <Warp
-          {...(warpPresets[0].params as any)}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            pointerEvents: "none",
-            opacity: 0.35,
-          }}
-        />
+        <WarpHeroBackground />
         <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
           <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-text-primary sm:text-5xl sm:leading-[1.15]">
             {renderHeroTitle(heroTitle)}
