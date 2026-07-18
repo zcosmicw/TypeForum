@@ -2,19 +2,19 @@
 
 :root {
   --bg-root: #09090b;
-  --bg-surface: #111113;
-  --bg-elevated: #18181b;
-  --bg-card: #1c1c20;
-  --bg-hover: #222226;
+  --bg-surface: rgba(17, 17, 19, 0.45);
+  --bg-elevated: rgba(24, 24, 27, 0.55);
+  --bg-card: rgba(28, 28, 32, 0.45);
+  --bg-hover: rgba(34, 34, 38, 0.65);
 
   --text-primary: #e8e6e3;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
   --text-ghost: #3f3f46;
 
-  --border-subtle: #1e1e22;
-  --border-default: #27272a;
-  --border-strong: #3f3f46;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
 
   --accent: #f0c000;
   --accent-dim: #c49e00;
@@ -55,7 +55,7 @@
 }
 
 body {
-  background: var(--bg-root);
+  background: transparent;
   color: var(--text-primary);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -105,12 +105,14 @@ a {
 .surface {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(12px);
 }
 
 .elevated {
   background: var(--bg-elevated);
   border: 1px solid var(--border-default);
   border-radius: 8px;
+  backdrop-filter: blur(16px);
 }
 
 .card {
@@ -118,6 +120,8 @@ a {
   border: 1px solid var(--border-default);
   border-radius: 10px;
   transition: border-color 0.2s ease;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 
 .card-hover:hover {
@@ -221,7 +225,7 @@ a {
 
 .input-field {
   width: 100%;
-  background: var(--bg-root);
+  background: rgba(9, 9, 11, 0.4);
   border: 1px solid var(--border-default);
   border-radius: 8px;
   color: var(--text-primary);
@@ -229,6 +233,7 @@ a {
   font-size: 0.875rem;
   font-family: inherit;
   transition: border-color 0.15s ease;
+  backdrop-filter: blur(10px);
 }
 .input-field::placeholder {
   color: var(--text-ghost);

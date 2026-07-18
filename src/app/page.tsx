@@ -3,7 +3,6 @@ import { AdSlot } from "@/components/AdSlot";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ThreadRow } from "@/components/ThreadRow";
 import { GlobalChat } from "@/components/GlobalChat";
-import WarpHeroBackground from "@/components/WarpHeroBackground";
 import { getSessionProfile } from "@/lib/actions/auth";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -47,7 +46,6 @@ export default async function Home() {
   return (
     <>
       <section className="relative border-b border-border-subtle bg-bg-surface overflow-hidden py-20 sm:py-28">
-        <WarpHeroBackground />
         <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
           <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-text-primary sm:text-5xl sm:leading-[1.15]">
             {renderHeroTitle(heroTitle)}
