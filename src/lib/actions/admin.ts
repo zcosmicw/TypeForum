@@ -150,8 +150,8 @@ export async function toggleBanUserAction(targetUserId: string, targetUsername: 
 }
 
 export async function updateUserRankAction(targetUserId: string, targetUsername: string, rank: string) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) throw new Error("Unauthorized: Only admins can manage user ranks");
+  const staff = await getAuthenticatedStaff();
+  if (!staff) throw new Error("Unauthorized: Only staff can manage user ranks");
 
   const supabase = await createClient();
   if (!supabase) throw new Error("Database not connected");

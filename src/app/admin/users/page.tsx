@@ -65,6 +65,7 @@ export default async function AdminUsersPage() {
                           targetUserId={user.id}
                           targetUsername={user.username}
                           targetUserRole={user.role}
+                          targetUserRank={user.rank as string}
                           targetUserIsBanned={user.is_banned}
                           currentUserRole={sessionProfile?.role ?? null}
                           buttonSize="sm"

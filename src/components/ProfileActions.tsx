@@ -8,6 +8,7 @@ type ProfileActionsProps = {
   targetUserId: string;
   username: string;
   targetUserRole: string;
+  targetUserRank: string;
   targetUserIsBanned: boolean;
   currentUserRole: string | null;
   isLoggedIn: boolean;
@@ -19,6 +20,7 @@ export function ProfileActions({
   targetUserId,
   username,
   targetUserRole,
+  targetUserRank,
   targetUserIsBanned,
   currentUserRole,
   isLoggedIn,
@@ -69,6 +71,7 @@ export function ProfileActions({
           targetUserId={targetUserId}
           targetUsername={username}
           targetUserRole={targetUserRole}
+          targetUserRank={targetUserRank}
           targetUserIsBanned={targetUserIsBanned}
           currentUserRole={currentUserRole}
           buttonSize="md"
