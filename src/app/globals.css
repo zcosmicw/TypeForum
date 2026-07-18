@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --bg-root: #09090b;
-  --bg-surface: rgba(17, 17, 19, 0.45);
-  --bg-elevated: rgba(24, 24, 27, 0.55);
-  --bg-card: rgba(28, 28, 32, 0.45);
-  --bg-hover: rgba(34, 34, 38, 0.65);
+  --bg-root: #060416;
+  --bg-surface: rgba(10, 8, 30, 0.45);
+  --bg-elevated: rgba(22, 18, 50, 0.5);
+  --bg-card: rgba(18, 14, 46, 0.45);
+  --bg-hover: rgba(35, 26, 75, 0.6);
 
-  --text-primary: #e8e6e3;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --text-ghost: #3f3f46;
+  --text-primary: #e6e5ec;
+  --text-secondary: #a7a4bf;
+  --text-muted: #797693;
+  --text-ghost: #4c4a63;
 
-  --border-subtle: rgba(255, 255, 255, 0.05);
-  --border-default: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.15);
+  --border-subtle: rgba(40, 207, 240, 0.08);
+  --border-default: rgba(40, 207, 240, 0.12);
+  --border-strong: rgba(187, 112, 223, 0.25);
 
-  --accent: #f0c000;
-  --accent-dim: #c49e00;
-  --accent-ghost: rgba(240, 192, 0, 0.08);
+  --accent: #28cff0;
+  --accent-dim: #00b0d0;
+  --accent-ghost: rgba(40, 207, 240, 0.08);
 
   --sage: #6b8f71;
-  --coral: #e06c75;
-  --steel: #6b9bd2;
+  --coral: #ff7b72;
+  --steel: #bb70df;
 }
 
 @theme inline {
