@@ -100,6 +100,10 @@ export async function updateUserRoleAction(targetUserId: string, targetUsername:
   const admin = await getAuthenticatedAdmin();
   if (!admin) throw new Error("Unauthorized: Only admins can manage roles");
 
+  if (role === "admin") {
+    throw new Error("Unauthorized: Cannot promote users to admin via this interface.");
+  }
+
   const supabase = await createClient();
   if (!supabase) throw new Error("Database not connected");
 
@@ -406,6 +410,10 @@ export async function updateUserRole(targetId: string, role: string) {
   const admin = await getAuthenticatedAdmin();
   if (!admin) throw new Error("Unauthorized");
 
+  if (role === "admin") {
+    throw new Error("Unauthorized: Cannot promote users to admin via this interface.");
+  }
+
   const supabase = await createClient();
   if (!supabase) throw new Error("Database not connected");
 
@@ -416,11 +424,22 @@ export async function updateUserRole(targetId: string, role: string) {
 }
 
 export async function deleteUserAction(targetId: string) {
-  const admin = await getAuthenticatedAdmin();
-  if (!admin) throw new Error("Unauthorized");
+  const staff = await getAuthenticatedStaff();
+  if (!staff) throw new Error("Unauthorized");
 
   const supabase = await createClient();
   if (!supabase) throw new Error("Database not connected");
+
+  const { data: targetProfile } = await supabase.from("profiles").select("role").eq("id", targetId).single();
+  
+  if (targetProfile) {
+    if (targetProfile.role === "admin" && staff.role !== "admin") {
+      throw new Error("Unauthorized: Only admins can delete admins");
+    }
+    if (targetProfile.role === "moderator" && staff.role !== "admin") {
+      throw new Error("Unauthorized: Only admins can delete moderators");
+    }
+  }
 
   const { error } = await supabase.from("profiles").delete().eq("id", targetId);
   if (error) throw new Error(error.message);

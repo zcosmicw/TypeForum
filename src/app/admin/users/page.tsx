@@ -1,7 +1,8 @@
 import { RankBadge } from "@/components/RankBadge";
-import { AdminRowActions } from "@/components/AdminRowActions";
+import { UserModerationActions } from "@/components/UserModerationActions";
 import { fetchAllUsers } from "@/lib/forum/queries";
 import { getSessionProfile } from "@/lib/actions/auth";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -35,7 +36,7 @@ export default async function AdminUsersPage() {
               return (
                 <tr key={user.id} className="transition-colors hover:bg-bg-hover/50">
                   <td className="px-5 py-3.5">
-                    <div className="flex items-center gap-3">
+                    <Link href={`/u/${user.username}`} className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-ghost text-xs font-bold text-accent overflow-hidden">
                         {user.avatar_url ? (
                           <img src={user.avatar_url} alt="" className="h-full w-full object-cover" />
@@ -44,10 +45,10 @@ export default async function AdminUsersPage() {
                         )}
                       </div>
                       <div>
-                        <div className="font-medium">{user.display_name}</div>
+                        <div className="font-medium hover:underline">{user.display_name}</div>
                         <div className="text-xs text-text-muted">@{user.username}</div>
                       </div>
-                    </div>
+                    </Link>
                   </td>
                   <td className="px-5 py-3.5">
                     <RankBadge rank={user.rank as any} size="sm" />
@@ -60,7 +61,14 @@ export default async function AdminUsersPage() {
                   <td className="px-5 py-3.5 text-right">
                     {!isSelf && (
                       <div className="flex justify-end">
-                        <AdminRowActions targetId={user.id} currentRole={user.role} />
+                        <UserModerationActions
+                          targetUserId={user.id}
+                          targetUsername={user.username}
+                          targetUserRole={user.role}
+                          targetUserIsBanned={user.is_banned}
+                          currentUserRole={sessionProfile?.role ?? null}
+                          buttonSize="sm"
+                        />
                       </div>
                     )}
                     {isSelf && <span className="text-xs text-text-ghost">You</span>}

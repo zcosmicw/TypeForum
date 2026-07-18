@@ -2,11 +2,13 @@
 
 import { useState, useTransition } from "react";
 import { followUser, unfollowUser } from "@/lib/actions/forum";
+import { UserModerationActions } from "@/components/UserModerationActions";
 
 type ProfileActionsProps = {
   targetUserId: string;
   username: string;
   targetUserRole: string;
+  targetUserIsBanned: boolean;
   currentUserRole: string | null;
   isLoggedIn: boolean;
   initialIsFollowing: boolean;
@@ -17,6 +19,7 @@ export function ProfileActions({
   targetUserId,
   username,
   targetUserRole,
+  targetUserIsBanned,
   currentUserRole,
   isLoggedIn,
   initialIsFollowing,
@@ -45,8 +48,6 @@ export function ProfileActions({
     });
   };
 
-  const showBanButton = !isOwnProfile && currentUserRole === "admin" && targetUserRole !== "admin";
-
   return (
     <div className="flex flex-wrap items-center gap-3">
       {!isOwnProfile ? (
@@ -63,13 +64,15 @@ export function ProfileActions({
         </a>
       )}
 
-      {showBanButton && (
-        <button
-          onClick={() => alert("Ban action not fully implemented in this demo")}
-          className="btn-danger px-4 py-2"
-        >
-          Ban user
-        </button>
+      {!isOwnProfile && (
+        <UserModerationActions
+          targetUserId={targetUserId}
+          targetUsername={username}
+          targetUserRole={targetUserRole}
+          targetUserIsBanned={targetUserIsBanned}
+          currentUserRole={currentUserRole}
+          buttonSize="md"
+        />
       )}
     </div>
   );

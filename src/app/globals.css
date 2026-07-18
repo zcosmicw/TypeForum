@@ -49,7 +49,7 @@
   --color-coral: var(--coral);
   --color-steel: var(--steel);
 
-  --font-body: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-body: var(--font-poppins), system-ui, sans-serif;
   --font-mono: var(--font-space-mono), ui-monospace, monospace;
   --font-code: var(--font-geist-mono), ui-monospace, monospace;
 }

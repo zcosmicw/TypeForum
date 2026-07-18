@@ -90,6 +90,7 @@ export default async function ProfilePage({
               targetUserId={user.id}
               username={user.username}
               targetUserRole={user.role}
+              targetUserIsBanned={user.isBanned}
               currentUserRole={sessionProfile?.role ?? null}
               isLoggedIn={!!sessionUser}
               initialIsFollowing={isFollowing}

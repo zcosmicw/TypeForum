@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Space_Mono, Geist_Mono } from "next/font/google";
+import { Poppins, Space_Mono, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SupabaseSetupBanner } from "@/components/SupabaseSetupBanner";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -40,7 +41,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${spaceMono.variable} ${geistMono.variable} h-full`}
+      className={`${poppins.variable} ${spaceMono.variable} ${geistMono.variable} h-full`}
     >
       <body className="relative flex min-h-full flex-col">
         <SupabaseSetupBanner />
