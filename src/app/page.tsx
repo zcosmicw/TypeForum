@@ -1,9 +1,9 @@
 import Link from "next/link";
-import dynamicImport from "next/dynamic";
 import { AdSlot } from "@/components/AdSlot";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ThreadRow } from "@/components/ThreadRow";
 import { GlobalChat } from "@/components/GlobalChat";
+import WarpHeroBackground from "@/components/WarpHeroBackground";
 import { getSessionProfile } from "@/lib/actions/auth";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -11,11 +11,6 @@ import {
   fetchRecentThreads,
   fetchTrendingThreads,
 } from "@/lib/data";
-
-const WarpHeroBackground = dynamicImport(
-  () => import("@/components/WarpHeroBackground"),
-  { ssr: false }
-);
 
 export const dynamic = "force-dynamic";
 
