@@ -192,7 +192,7 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
   };
 
   return (
-    <div className="card overflow-hidden">
+    <div className="card flex flex-col h-full overflow-hidden">
       <div className="flex items-center justify-between border-b border-border-default px-5 py-3">
         <div className="flex items-center gap-2.5">
           <span className="relative flex h-2 w-2">
@@ -217,7 +217,7 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
 
       <div
         ref={scrollContainerRef}
-        className="h-72 overflow-y-auto p-4 space-y-3"
+        className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[300px]"
       >
         {messages.map((message) => {
           const profile = profilesCache[message.profile_id];
@@ -253,7 +253,7 @@ export function GlobalChat({ currentUserProfile }: GlobalChatProps) {
         )}
       </div>
 
-      <div className="border-t border-border-default p-3 bg-bg-surface">
+      <div className="border-t border-border-default p-3 bg-bg-surface shrink-0">
         <form onSubmit={handleSendMessage} className="flex gap-2">
           <input
             type="text"

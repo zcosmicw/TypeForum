@@ -45,88 +45,95 @@ export default async function Home() {
 
   return (
     <>
-      <div className="mx-auto max-w-[1200px] px-5 pt-12 sm:px-8">
-        <section className="max-w-2xl py-6">
-          <h1 className="text-3xl font-bold tracking-tight text-text-primary sm:text-5xl sm:leading-[1.15]">
-            {renderHeroTitle(heroTitle)}
-          </h1>
-          <p className="mt-6 text-base leading-relaxed text-text-muted sm:text-lg">
-            {heroDescription}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/forums" className="btn-primary px-6 py-2.5 text-sm">
-              Browse forums
-            </Link>
-            <Link href="/signup" className="btn-secondary px-6 py-2.5 text-sm">
-              Join {siteName}
-            </Link>
-          </div>
-        </section>
-      </div>
-
-      <div className="mx-auto max-w-[1200px] px-5 py-10 sm:px-8">
-        <AdSlot variant="banner" />
-      </div>
-
-      <div className="mx-auto max-w-[1200px] px-5 pb-10 sm:px-8">
-        <GlobalChat currentUserProfile={profile} />
-      </div>
-
-      <section className="mx-auto max-w-[1200px] px-5 py-10 sm:px-8">
-        <div className="mb-8 flex items-end justify-between">
-          <div>
-            <p className="section-label mb-1">Explore</p>
-            <h2 className="text-xl font-bold tracking-tight text-text-primary sm:text-2xl">Categories</h2>
-          </div>
-          <Link href="/forums" className="text-sm font-medium text-accent hover:underline">
-            View all →
-          </Link>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.slice(0, 3).map((category) => (
-            <CategoryCard key={category.slug} category={category} />
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1200px] px-5 pb-10 sm:px-8">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-xl font-bold tracking-tight text-text-primary sm:text-2xl">Trending</h2>
-          <Link href="/discover" className="text-sm font-medium text-accent hover:underline">
-            Discover →
-          </Link>
-        </div>
-        <div className="card overflow-hidden">
-          {trending.slice(0, 4).map((thread) => (
-            <ThreadRow key={thread.id} thread={thread} />
-          ))}
-          {trending.length === 0 && (
-            <div className="px-6 py-14 text-center text-sm text-text-muted">
-              No trending threads yet. Be the first to post.
+      <div className="mx-auto max-w-[1200px] px-5 pb-20 pt-10 sm:px-8">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
+          
+          {/* Top Left: Hero - spans 8 */}
+          <div className="flex flex-col justify-center py-6 lg:col-span-8 lg:py-10">
+            <h1 className="text-4xl font-bold tracking-tight text-text-primary sm:text-6xl sm:leading-[1.12]">
+              {renderHeroTitle(heroTitle)}
+            </h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
+              {heroDescription}
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link href="/forums" className="btn-primary px-8 py-3 text-[0.9375rem]">
+                Browse forums
+              </Link>
+              <Link href="/signup" className="btn-secondary px-8 py-3 text-[0.9375rem]">
+                Join {siteName}
+              </Link>
             </div>
-          )}
-        </div>
-      </section>
+          </div>
 
-      <section className="mx-auto max-w-[1200px] px-5 pb-20 sm:px-8">
-        <div className="mb-6">
-          <h2 className="text-xl font-bold tracking-tight text-text-primary sm:text-2xl">Recent threads</h2>
-        </div>
-        <div className="card overflow-hidden">
-          {recentThreads.map((thread) => (
-            <ThreadRow key={thread.id} thread={thread} />
-          ))}
-          {recentThreads.length === 0 && (
-            <div className="px-6 py-14 text-center text-sm text-text-muted">
-              No threads yet.{" "}
-              <Link href="/signup" className="font-medium text-accent hover:underline">
-                Sign up
-              </Link>{" "}
-              and start the conversation.
+          {/* Top Right: Global Chat - spans 4, tall bento block */}
+          <div className="lg:col-span-4 lg:row-span-2">
+            <div className="h-[400px] lg:h-full lg:min-h-[500px]">
+              <GlobalChat currentUserProfile={profile} />
             </div>
-          )}
+          </div>
+
+          {/* Middle Left: Trending - spans 8 */}
+          <div className="lg:col-span-8">
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="text-xl font-bold tracking-tight text-text-primary">Trending Discussions</h2>
+              <Link href="/discover" className="text-sm font-medium text-accent hover:underline">
+                Discover →
+              </Link>
+            </div>
+            <div className="card overflow-hidden">
+              {trending.slice(0, 3).map((thread) => (
+                <ThreadRow key={thread.id} thread={thread} />
+              ))}
+              {trending.length === 0 && (
+                <div className="px-6 py-14 text-center text-sm text-text-muted">
+                  No trending threads yet. Be the first to post.
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Full Width: Categories - spans 12 */}
+          <div className="mt-6 lg:col-span-12 lg:mt-8">
+            <div className="mb-5 flex items-end justify-between">
+              <div>
+                <p className="section-label mb-1">Explore</p>
+                <h2 className="text-xl font-bold tracking-tight text-text-primary">Categories</h2>
+              </div>
+              <Link href="/forums" className="text-sm font-medium text-accent hover:underline">
+                View all →
+              </Link>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {categories.slice(0, 3).map((category) => (
+                <CategoryCard key={category.slug} category={category} />
+              ))}
+            </div>
+          </div>
+
+          {/* Full Width: Recent Threads - spans 12 */}
+          <div className="mt-6 lg:col-span-12 lg:mt-8">
+            <div className="mb-5">
+              <h2 className="text-xl font-bold tracking-tight text-text-primary">Recent threads</h2>
+            </div>
+            <div className="card overflow-hidden">
+              {recentThreads.map((thread) => (
+                <ThreadRow key={thread.id} thread={thread} />
+              ))}
+              {recentThreads.length === 0 && (
+                <div className="px-6 py-14 text-center text-sm text-text-muted">
+                  No threads yet.{" "}
+                  <Link href="/signup" className="font-medium text-accent hover:underline">
+                    Sign up
+                  </Link>{" "}
+                  and start the conversation.
+                </div>
+              )}
+            </div>
+          </div>
+          
         </div>
-      </section>
+      </div>
     </>
   );
 }

@@ -8,7 +8,7 @@ export function CategoryCard({ category }: { category: Category }) {
       className="group card card-hover flex flex-col p-5"
     >
       <div className="mb-4 flex items-center justify-between">
-        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-ghost text-base">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-ghost text-lg transition-transform duration-300 group-hover:scale-110 group-hover:bg-accent/20 group-hover:shadow-[0_0_15px_rgba(40,207,240,0.3)]">
           {category.icon}
         </span>
         <span className="mono text-xs font-medium text-text-muted">

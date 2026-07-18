@@ -21,8 +21,9 @@ export async function Header() {
   const siteName = siteSettings?.site_name || "TypeForum";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border-subtle bg-bg-root/95 backdrop-blur-md">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+    <div className="sticky top-4 z-50 mx-auto w-[calc(100%-2rem)] max-w-[1200px] sm:w-[calc(100%-4rem)]">
+      <header className="rounded-2xl border border-border-default bg-bg-surface/80 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-[20px]">
+        <div className="px-5 sm:px-6">
         <div className="flex h-14 items-center justify-between gap-6">
           <Link href="/" className="group flex shrink-0 items-center gap-2.5">
             <span className="flex h-7 w-7 items-center justify-center rounded-md bg-accent text-xs font-bold text-bg-root">
@@ -136,6 +137,7 @@ export async function Header() {
           ))}
         </nav>
       </div>
-    </header>
+      </header>
+    </div>
   );
 }
