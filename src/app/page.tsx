@@ -45,27 +45,29 @@ export default async function Home() {
 
   return (
     <>
-      <section 
-        className="relative border-b border-border-subtle overflow-hidden py-20 sm:py-28 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/bg.png')" }}
-      >
-        <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
-          <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-text-primary sm:text-5xl sm:leading-[1.15]">
-            {renderHeroTitle(heroTitle)}
-          </h1>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-text-muted sm:text-lg">
-            {heroDescription}
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link href="/forums" className="btn-primary px-7 py-3 text-sm">
-              Browse forums
-            </Link>
-            <Link href="/signup" className="btn-secondary px-7 py-3 text-sm">
-              Join {siteName}
-            </Link>
+      <div className="mx-auto max-w-[1200px] px-5 pt-10 sm:px-8">
+        <section 
+          className="card relative overflow-hidden py-16 px-8 sm:px-12 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/bg.png')" }}
+        >
+          <div className="relative z-10 max-w-2xl">
+            <h1 className="text-3xl font-bold tracking-tight text-text-primary sm:text-5xl sm:leading-[1.15]">
+              {renderHeroTitle(heroTitle)}
+            </h1>
+            <p className="mt-6 text-base leading-relaxed text-text-muted sm:text-lg">
+              {heroDescription}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/forums" className="btn-primary px-6 py-2.5 text-sm">
+                Browse forums
+              </Link>
+              <Link href="/signup" className="btn-secondary px-6 py-2.5 text-sm">
+                Join {siteName}
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <div className="mx-auto max-w-[1200px] px-5 py-10 sm:px-8">
         <AdSlot variant="banner" />
