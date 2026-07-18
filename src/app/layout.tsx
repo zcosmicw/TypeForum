@@ -3,7 +3,6 @@ import { Space_Grotesk, Space_Mono, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SupabaseSetupBanner } from "@/components/SupabaseSetupBanner";
-import AmbientBackground from "@/components/AmbientBackground";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -43,10 +42,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${spaceMono.variable} ${geistMono.variable} h-full`}
     >
-      <body className="relative flex min-h-full flex-col bg-transparent">
-        <div className="fixed inset-0 -z-50 overflow-hidden pointer-events-none">
-          <AmbientBackground />
-        </div>
+      <body className="relative flex min-h-full flex-col">
         <SupabaseSetupBanner />
         <Header />
         <main className="flex-1 relative z-10">{children}</main>

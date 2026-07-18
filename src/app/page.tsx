@@ -49,7 +49,6 @@ export default async function Home() {
         className="relative border-b border-border-subtle overflow-hidden py-20 sm:py-28 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/bg.png')" }}
       >
-        <div className="absolute inset-0 bg-[#060416]/70 backdrop-blur-[6px] pointer-events-none" />
         <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
           <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-text-primary sm:text-5xl sm:leading-[1.15]">
             {renderHeroTitle(heroTitle)}

@@ -55,9 +55,14 @@
 }
 
 body {
-  background: transparent;
-  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
   font-family: var(--font-body);
+  color: var(--text-primary);
+  background: url('/bg.png') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -116,16 +121,22 @@ a {
 }
 
 .card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-default);
-  border-radius: 10px;
-  transition: border-color 0.2s ease;
+  background: rgba(10, 11, 22, 0.35); 
   backdrop-filter: blur(20px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
+              inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.2s ease;
 }
 
-.card-hover:hover {
-  border-color: var(--border-strong);
+.card:hover, .card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 
+              0 0 40px rgba(0, 242, 254, 0.15), 
+              inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  border-color: rgba(40, 207, 240, 0.3);
 }
 
 .btn-primary {
