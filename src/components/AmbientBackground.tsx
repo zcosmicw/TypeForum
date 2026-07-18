@@ -15,7 +15,7 @@ export default function AmbientBackground() {
 
   return (
     <div className="absolute inset-0 bg-[#060416] overflow-hidden">
-      {/* Fine Editorial Dot Grid */}
+      {}
       <div 
         className="absolute inset-0 opacity-[0.06] pointer-events-none"
         style={{
@@ -24,7 +24,7 @@ export default function AmbientBackground() {
         }}
       />
       
-      {/* Soft Ambient Shifting Gradients */}
+      {}
       <div 
         className="absolute w-[60%] h-[60%] rounded-full bg-accent/6 blur-[100px] pointer-events-none animate-ambient-1"
         style={{
@@ -40,7 +40,7 @@ export default function AmbientBackground() {
         }}
       />
 
-      {/* Dark Blending Overlay */}
+      {}
       <div className="absolute inset-0 bg-[#060416]/35 pointer-events-none" />
     </div>
   );

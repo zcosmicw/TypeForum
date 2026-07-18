@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { AdSlot } from "@/components/AdSlot";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ThreadRow } from "@/components/ThreadRow";
 import { GlobalChat } from "@/components/GlobalChat";
@@ -48,7 +47,7 @@ export default async function Home() {
       <div className="mx-auto max-w-[1200px] px-5 pb-20 pt-10 sm:px-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
           
-          {/* Top Left: Hero - spans 8 */}
+          {}
           <div className="flex flex-col justify-center py-6 lg:col-span-8 lg:py-10">
             <h1 className="text-4xl font-bold tracking-tight text-text-primary sm:text-6xl sm:leading-[1.12]">
               {renderHeroTitle(heroTitle)}
@@ -66,14 +65,14 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Top Right: Global Chat - spans 4, tall bento block */}
+          {}
           <div className="lg:col-span-4 lg:row-span-2">
             <div className="h-[400px] lg:h-full lg:min-h-[500px]">
               <GlobalChat currentUserProfile={profile} />
             </div>
           </div>
 
-          {/* Middle Left: Trending - spans 8 */}
+          {}
           <div className="lg:col-span-8">
             <div className="mb-5 flex items-center justify-between">
               <h2 className="text-xl font-bold tracking-tight text-text-primary">Trending Discussions</h2>
@@ -93,7 +92,7 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Full Width: Categories - spans 12 */}
+          {}
           <div className="mt-6 lg:col-span-12 lg:mt-8">
             <div className="mb-5 flex items-end justify-between">
               <div>
@@ -111,7 +110,7 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Full Width: Recent Threads - spans 12 */}
+          {}
           <div className="mt-6 lg:col-span-12 lg:mt-8">
             <div className="mb-5">
               <h2 className="text-xl font-bold tracking-tight text-text-primary">Recent threads</h2>

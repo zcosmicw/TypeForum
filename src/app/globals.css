@@ -1,26 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  /* Deep dark gunmetal/void for roots to match the center of the image */
-  --bg-root: #050507;
+    --bg-root: #050507;
   --bg-surface: rgba(20, 20, 25, 0.45);
   --bg-elevated: rgba(30, 30, 38, 0.5);
   --bg-card: rgba(20, 20, 25, 0.45);
   --bg-hover: rgba(45, 45, 55, 0.6);
 
-  /* Sleek silver/white text */
-  --text-primary: #ffffff;
+    --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
   --text-ghost: #52525b;
 
-  /* Subtle metallic/glass borders */
-  --border-subtle: rgba(255, 255, 255, 0.04);
+    --border-subtle: rgba(255, 255, 255, 0.04);
   --border-default: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.2);
 
-  /* Premium Chrome/White accent */
-  --accent: #ffffff;
+    --accent: #ffffff;
   --accent-dim: #e2e8f0;
   --accent-ghost: rgba(255, 255, 255, 0.1);
 

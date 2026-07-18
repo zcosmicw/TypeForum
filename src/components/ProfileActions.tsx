@@ -2,7 +2,6 @@
 
 import { useState, useTransition } from "react";
 import { followUser, unfollowUser } from "@/lib/actions/forum";
-import type { UserRank } from "@/lib/types";
 
 type ProfileActionsProps = {
   targetUserId: string;

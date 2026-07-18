@@ -295,7 +295,7 @@ export async function toggleFollowUserAction(targetUsername: string) {
   const supabase = await createClient();
   if (!supabase) return { error: getSupabaseEnvError() };
 
-  // Get the target user's profile id
+  
   const { data: targetProfile } = await supabase
     .from("profiles")
     .select("id")
@@ -308,7 +308,7 @@ export async function toggleFollowUserAction(targetUsername: string) {
     return { error: "You cannot follow yourself." };
   }
 
-  // Check if already following
+  
   const { data: existingFollow } = await supabase
     .from("follows")
     .select("*")
@@ -319,7 +319,7 @@ export async function toggleFollowUserAction(targetUsername: string) {
   let isNowFollowing = false;
 
   if (existingFollow) {
-    // Unfollow
+    
     const { error } = await supabase
       .from("follows")
       .delete()
@@ -328,7 +328,7 @@ export async function toggleFollowUserAction(targetUsername: string) {
 
     if (error) return { error: error.message };
   } else {
-    // Follow
+    
     const { error } = await supabase
       .from("follows")
       .insert({

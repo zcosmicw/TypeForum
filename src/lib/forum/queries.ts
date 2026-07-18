@@ -325,7 +325,7 @@ export async function fetchPostsByThread(threadId: string): Promise<Post[]> {
 
   if (!thread) return [];
 
-  // Fetch actual votes for the thread to populate the OP post and check user vote
+  
   const [{ data: threadVotes }, { data: { user } }] = await Promise.all([
     supabase.from("thread_votes").select("value, user_id").eq("thread_id", threadId),
     supabase.auth.getUser(),
@@ -403,7 +403,7 @@ export async function fetchPostsByThread(threadId: string): Promise<Post[]> {
     });
   });
 
-  // Construct recursive reply tree
+  
   const postMap = new Map<string, Post>();
 
   postMap.set(opPost.id, { ...opPost, replies: [] });

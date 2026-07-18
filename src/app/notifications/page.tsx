@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { PageHero } from "@/components/PageHero";
 import { getSessionUser } from "@/lib/actions/auth";
-import { fetchNotifications, markAllNotificationsRead } from "@/lib/data";
+import { fetchNotifications } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 

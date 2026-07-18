@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getSessionProfile } from "@/lib/actions/auth";
 import { getSupabaseEnvError } from "@/lib/supabase/config";
 
-// Helper to check permissions
+
 async function getAuthenticatedStaff() {
   const profile = await getSessionProfile();
   if (!profile) return null;
@@ -33,7 +33,7 @@ export async function deleteThreadAction(threadId: string) {
   const supabase = await createClient();
   if (!supabase) throw new Error("Database not connected");
 
-  // Fetch thread details to check ownership and get category slug
+  
   const { data: thread } = await supabase
     .from("threads")
     .select("*, categories(slug)")
@@ -69,7 +69,7 @@ export async function deletePostAction(postId: string, threadId: string) {
   const supabase = await createClient();
   if (!supabase) throw new Error("Database not connected");
 
-  // Fetch post details to check ownership
+  
   const { data: post } = await supabase
     .from("posts")
     .select("*")
@@ -122,7 +122,7 @@ export async function toggleBanUserAction(targetUserId: string, targetUsername: 
   const supabase = await createClient();
   if (!supabase) throw new Error(getSupabaseEnvError());
 
-  // Prevent staff from banning other admins
+  
   const { data: targetProfile } = await supabase
     .from("profiles")
     .select("role")
@@ -171,7 +171,7 @@ export async function resetChatAction() {
   const supabase = await createClient();
   if (!supabase) throw new Error("Database not connected");
 
-  // Delete all rows in global_chat_messages table
+  
   const { error } = await supabase
     .from("global_chat_messages")
     .delete()

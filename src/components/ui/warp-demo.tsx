@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Warp, { warpPresets } from "@/components/ui/warp";
 
 const MONO = '"Paper Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
