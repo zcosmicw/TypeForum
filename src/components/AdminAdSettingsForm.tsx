@@ -101,7 +101,7 @@ export function AdminAdSettingsForm({ config }: { config: any }) {
 
         <div>
           <label htmlFor="adLink" className="label-field">Target URL</label>
-          <input id="adLink" name="adLink" defaultValue={config?.target_url || ""} placeholder="https:
+          <input id="adLink" name="adLink" defaultValue={config?.target_url || ""} placeholder="https://example.com" className="input-field" />
         </div>
       </div>
 
