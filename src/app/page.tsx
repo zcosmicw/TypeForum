@@ -59,9 +59,15 @@ export default async function Home() {
               <Link href="/forums" className="btn-primary px-8 py-3 text-[0.9375rem]">
                 Browse forums
               </Link>
-              <Link href="/signup" className="btn-secondary px-8 py-3 text-[0.9375rem]">
-                Join {siteName}
-              </Link>
+              {!profile ? (
+                <Link href="/signup" className="btn-secondary px-8 py-3 text-[0.9375rem]">
+                  Join {siteName}
+                </Link>
+              ) : (
+                <Link href={`/u/${profile.username}`} className="btn-secondary px-8 py-3 text-[0.9375rem]">
+                  My Profile
+                </Link>
+              )}
             </div>
           </div>
 

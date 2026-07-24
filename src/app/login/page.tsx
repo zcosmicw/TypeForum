@@ -1,6 +1,15 @@
 import { AuthForm } from "@/components/AuthForm";
+import { getSessionUser } from "@/lib/actions/auth";
+import { redirect } from "next/navigation";
 
-export default function LoginPage() {
+export const dynamic = "force-dynamic";
+
+export default async function LoginPage() {
+  const user = await getSessionUser();
+  if (user) {
+    redirect("/forums");
+  }
+
   return (
     <div className="flex flex-1 items-center justify-center px-5 py-20">
       <div className="w-full max-w-sm">

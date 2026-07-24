@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { getSessionProfile } from "@/lib/actions/auth";
 
 export async function Footer() {
-  const supabase = await createClient();
+  const [supabase, profile] = await Promise.all([
+    createClient(),
+    getSessionProfile(),
+  ]);
   const siteSettings = supabase
     ? await supabase.from("site_settings").select("site_name, footer_main, footer_sub").eq("id", 1).maybeSingle().then((res) => res.data)
     : null;
@@ -40,9 +44,17 @@ export async function Footer() {
             <div>
               <p className="section-label mb-3">Account</p>
               <div className="flex flex-col gap-2">
-                <Link href="/login" className="text-sm text-text-muted transition-colors hover:text-text-primary">Log in</Link>
-                <Link href="/signup" className="text-sm text-text-muted transition-colors hover:text-text-primary">Sign up</Link>
-                <Link href="/settings" className="text-sm text-text-muted transition-colors hover:text-text-primary">Settings</Link>
+                {profile ? (
+                  <>
+                    <Link href={`/u/${profile.username}`} className="text-sm text-text-muted transition-colors hover:text-text-primary">Profile</Link>
+                    <Link href="/settings" className="text-sm text-text-muted transition-colors hover:text-text-primary">Settings</Link>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/login" className="text-sm text-text-muted transition-colors hover:text-text-primary">Log in</Link>
+                    <Link href="/signup" className="text-sm text-text-muted transition-colors hover:text-text-primary">Sign up</Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
